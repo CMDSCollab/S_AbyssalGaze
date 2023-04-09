@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Mine
+  - Monster
+  - Bullet
   layers:
   - Default
   - TransparentFX
