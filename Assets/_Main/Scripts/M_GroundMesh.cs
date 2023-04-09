@@ -16,18 +16,9 @@ public class M_GroundMesh : MonoBehaviour
            new Vector3(10,0,-10f),
     };
 
-    public bool isOnGround = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         GenerateIntinialLevel();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isOnGround) GroundMoveUpwards();
     }
 
     public void GenerateIntinialLevel()
@@ -54,15 +45,5 @@ public class M_GroundMesh : MonoBehaviour
             Vector3 targetPos = new Vector3(pivotPos[randomPosIndex].x, i * apartYDistance, pivotPos[randomPosIndex].z);
             Instantiate(pre_GroundMesh, targetPos, Quaternion.Euler(0,targetYRotation,0), parent_Ground);
         }
-    }
-
-    //public void InstantiateNewGround()
-    //{
-    //    Instantiate(pre_GroundMesh);
-    //}
-
-    public void GroundMoveUpwards()
-    {
-
     }
 }
