@@ -109,13 +109,13 @@ public class O_GroundMesh : MonoBehaviour
 
     void GenerateMineSpot()
     {
-        int spawnNumber = Random.Range(M_Mineral.instance.spawnNum - 1, M_Mineral.instance.spawnNum + 1);
+        int spawnNumber = Random.Range(M_Mineral.Instance.spawnNum - 1, M_Mineral.Instance.spawnNum + 1);
         for (int i = 0; i < spawnNumber; i++)
         {
             //int randomVertex = Random.Range(2, vertices.Length - 2);
             //float randomZ = Random.Range(M_Mineral.instance.posShrinkage, newMesh.vertices[randomVertex].z);
             //Vector3 spawnPos = new Vector3(newMesh.vertices[randomVertex].x, transform.position.y + 0.1f, randomZ);
-            Transform trans = Instantiate(M_Mineral.instance.pre_Mineral, transform).transform;
+            Transform trans = Instantiate(M_Mineral.Instance.pre_Mineral, transform).transform;
             trans.localPosition = new Vector3(Random.Range(2, 17.3f), 0.1f, Random.Range(4, 7.1f));
         }
     }

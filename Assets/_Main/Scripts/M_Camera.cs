@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class M_Camera : MonoBehaviour
+public class M_Camera : Singleton<M_Camera>
 {
-    public Transform obj_Machine;
     private float verDistanceOffset;
-    // Start is called before the first frame update
+
     void Start()
     {
-        verDistanceOffset = transform.position.y - obj_Machine.position.y;
+        verDistanceOffset = transform.position.y - M_Machine.Instance.transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //transform.position = new Vector3(0, obj_Machine.position.y + verDistanceOffset, 0);
-        transform.position = new Vector3(obj_Machine.position.x, obj_Machine.position.y + verDistanceOffset, obj_Machine.position.z);
+        transform.position = new Vector3(M_Machine.Instance.transform.position.x, M_Machine.Instance.transform.position.y + verDistanceOffset, M_Machine.Instance.transform.position.z);
     }
 }

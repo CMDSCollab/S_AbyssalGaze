@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class M_Machine : MonoBehaviour
+public class M_Machine : Singleton<M_Machine>
 {
     private Rigidbody rb;
     public float moveSpeed;
@@ -12,7 +12,6 @@ public class M_Machine : MonoBehaviour
     private int currentLayer;
     public TMPro.TMP_Text text_Depth;
     public bool isOnGround = false;
-    public static M_Machine instance;
     public float maxOxygen;
     private float currentOxygen;
     public Slider slider_Oxygen;
@@ -24,7 +23,6 @@ public class M_Machine : MonoBehaviour
 
     void Start()
     {
-        instance = this;
         rb = GetComponent<Rigidbody>();
         slider_Oxygen.maxValue = maxOxygen;
         currentOxygen = maxOxygen;
@@ -37,10 +35,7 @@ public class M_Machine : MonoBehaviour
         float verAxis = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horiAxis, 0, verAxis).normalized;
         if (direction != Vector3.zero)
-        {
             rb.velocity = new Vector3( direction.x*moveSpeed,rb.velocity.y,direction.z*moveSpeed);
-            //rb.AddForce(direction * moveSpeed);
-        }
 
         if (!isOnGround) SetCurrentDepth(transform.position.y);
 

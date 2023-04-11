@@ -30,7 +30,6 @@ public class M_GroundMesh : MonoBehaviour
         {
             int targetYRotation = 0;
       
-            //int randomPosIndex = Random.Range(0, pivotPos.Length);
             switch (j)
             {
                 case 0:
@@ -82,8 +81,5 @@ public class M_GroundMesh : MonoBehaviour
         bottom.transform.position += new Vector3(0, apartYDistance, 0);
         previousLevelPosIndex++;
         if (previousLevelPosIndex >= 4) previousLevelPosIndex = 0;
-
-        //Destroy(parent_Ground.GetChild(0).gameObject, 0.1f);
-
     }
 }
