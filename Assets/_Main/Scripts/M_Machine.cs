@@ -3,54 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class M_Machine : Singleton<M_Machine>
 {
     private Rigidbody rb;
     public float moveSpeed;
-    private float currentDepth;
-    private int currentLayer;
-    public TMPro.TMP_Text text_Depth;
-    public bool isOnGround = false;
-    public float maxOxygen;
-    private float currentOxygen;
-    public Slider slider_Oxygen;
-    public TMPro.TMP_Text text_Oxygen;
+
+    private bool isOnGround = false;
     public float MiningTime;
-    public float MineralOxygenAmount;
     private float timer_mining;
-    public float dmgToTake;
+
+    public Action<float> MachineOnDive;
+    public Action MachineOnGround;
+    public Action<object> MachineOnHit;
+    public Action<object> MineComplete;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        slider_Oxygen.maxValue = maxOxygen;
-        currentOxygen = maxOxygen;
-        slider_Oxygen.value = currentOxygen;
+ 
     }
 
     void Update()
+    {
+        MachineMovement();
+
+        if (!isOnGround) MachineOnDive(transform.position.y);
+        else MachineOnGround();
+    }
+
+    public void MachineMovement()
     {
         float horiAxis = Input.GetAxis("Horizontal");
         float verAxis = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horiAxis, 0, verAxis).normalized;
         if (direction != Vector3.zero)
-            rb.velocity = new Vector3( direction.x*moveSpeed,rb.velocity.y,direction.z*moveSpeed);
-
-        if (!isOnGround) SetCurrentDepth(transform.position.y);
-
-        currentOxygen -= Time.deltaTime;
-        SliderTextValueSync();
-        if (currentOxygen<0)
-        {
-            SceneManager.LoadScene(0);
-        }
-    }
-
-    private void SliderTextValueSync()
-    {
-        slider_Oxygen.value = currentOxygen;
-        text_Oxygen.text = currentOxygen.ToString("f0") + " / " + maxOxygen.ToString();
+            rb.velocity = new Vector3(direction.x * moveSpeed, rb.velocity.y, direction.z * moveSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -65,7 +54,7 @@ public class M_Machine : Singleton<M_Machine>
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            currentOxygen -= dmgToTake;
+            MachineOnHit(other.gameObject);
         }
     }
 
@@ -77,9 +66,8 @@ public class M_Machine : Singleton<M_Machine>
             if (timer_mining > MiningTime)
             {
                 Destroy(other.gameObject);
-                currentOxygen += MineralOxygenAmount;
+                MineComplete(other.gameObject);
                 timer_mining = 0;
-                if (currentOxygen > maxOxygen) currentOxygen = maxOxygen;
             }
         }
     }
@@ -99,22 +87,5 @@ public class M_Machine : Singleton<M_Machine>
             isOnGround = false;
         }
 
-    }
-
-    public void SetCurrentDepth(float targetValue)
-    {
-        currentDepth = targetValue;
-        int newLayer = (int)currentDepth / 5;
-        if (newLayer != currentLayer)
-        {
-            currentLayer = newLayer;
-            FindObjectOfType<M_GroundMesh>().GenerateNewLevel(-currentLayer);
-        }
-        text_Depth.text = "Depth: " + currentDepth.ToString("f2") + " Layer: " + currentLayer.ToString();
-    }
-
-    public float GetCurrentDepth()
-    {
-        return currentDepth;
     }
 }

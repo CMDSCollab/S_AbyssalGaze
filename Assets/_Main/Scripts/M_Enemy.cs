@@ -12,14 +12,22 @@ public class M_Enemy : Singleton<M_Enemy>
 
     void Update()
     {
-        if (M_Machine.Instance.isOnGround) timer += Time.deltaTime;
-        else timer = 0;
 
         if (timer>spawnTime)
         {
-            //MonsterGeneration();
+            MonsterGeneration();
             timer = 0;
         }
+    }
+
+    public void EnemyGenerationProcess()
+    {
+        timer += Time.deltaTime;
+    }
+
+    public void EnemyGenerationStop(float machineYValue)
+    {
+        timer = 0;
     }
 
     void MonsterGeneration()
