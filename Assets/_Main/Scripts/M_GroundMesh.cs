@@ -10,6 +10,7 @@ public class M_GroundMesh : MonoBehaviour
     public Transform parent_Ground;
     private int previousLevelPosIndex;
     public int groundScaleOffset;
+    public LayerMask groundLayer;
 
     private bool isPreviousGroundUpper = false;
 
@@ -73,7 +74,7 @@ public class M_GroundMesh : MonoBehaviour
         newPlane.position -= new Vector3(xOffset, 0, zOffset);
 
         newPlane.RotateAround(Vector3.zero, Vector3.up, isPreviousGroundUpper ? Random.Range(0, 180) : Random.Range(180, 360));
-
+        newPlane.gameObject.layer = LayerMask.NameToLayer("Ground");
         //Vector2 peripheryPoint = GetArcPoint(new Vector2(30, 20), newPlane.transform.localRotation.y);
         //float distance = Vector2.Distance(Vector2.zero, peripheryPoint)*0.1f;
         //Debug.Log(distance+" - "+ newPlane.transform.localRotation.y);

@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 293211755}
   - component: {fileID: 293211754}
   m_Layer: 0
-  m_Name: Firearm
+  m_Name: ArmPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293211751}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.023, y: 0.5, z: 0.3310005}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -564,7 +564,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293211751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -731,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315996607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: -2.55}
+  m_LocalPosition: {x: -0.031, y: 0.6000004, z: -2.7440152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1103,7 +1103,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -4082,6 +4082,9 @@ MonoBehaviour:
   apartYDistance: -9.5
   parent_Ground: {fileID: 1707484947}
   groundScaleOffset: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &1592444600
 Transform:
   m_ObjectHideFlags: 0
@@ -4586,7 +4589,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd9667425a955c45b82173da5ab0d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent_Firearm: {fileID: 1922223443}
+  parent_Firearm: {fileID: 293211752}
+  parent_Rotation: {fileID: 1922223443}
+  firearmList:
+  - {fileID: 746702234998035147, guid: 44f904a7d8a3ee141b7eec2bdf970e21, type: 3}
+  pre_Bullet: {fileID: 6148315197614702318, guid: ae7dffc4454f14a45af50e1495682761, type: 3}
 --- !u!114 &1680443424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4599,7 +4606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b63111b25afde04c95414ca67193d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxOxygen: 100
+  maxOxygen: 10000
   slider_Oxygen: {fileID: 1573704201}
   text_Oxygen: {fileID: 1550046689}
   oxygenToDecreaseOnHit: 20
@@ -5397,7 +5404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922223442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.13100004}
+  m_LocalPosition: {x: 0, y: 0, z: -0.244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
