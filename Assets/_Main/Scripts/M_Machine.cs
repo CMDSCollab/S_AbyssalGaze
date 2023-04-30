@@ -13,6 +13,8 @@ public class M_Machine : Singleton<M_Machine>
     private bool isOnGround = false;
     public float MiningTime;
     private float timer_mining;
+    private O_GroundMesh currentGround;
+
 
     public Action<float> MachineOnDive;
     public Action MachineOnGround;
@@ -47,6 +49,16 @@ public class M_Machine : Singleton<M_Machine>
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            currentGround = collision.gameObject.GetComponent<O_GroundMesh>();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = false;
+            currentGround = null;
         }
     }
 
@@ -60,32 +72,30 @@ public class M_Machine : Singleton<M_Machine>
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Mine"))
+        //if (other.gameObject.CompareTag("Mine"))
+        //{
+        //    timer_mining += Time.deltaTime;
+        //    if (timer_mining > MiningTime)
+        //    {
+        //        Destroy(other.gameObject);
+        //        MineComplete(other.gameObject);
+        //        timer_mining = 0;
+        //    }
+        //}
+
+        if (other.gameObject.CompareTag("Mineral") )
         {
-            timer_mining += Time.deltaTime;
-            if (timer_mining > MiningTime)
-            {
-                Destroy(other.gameObject);
-                MineComplete(other.gameObject);
-                timer_mining = 0;
-            }
+            Debug.Log("There is Mineral");
+            if (Input.GetKeyDown(KeyCode.Space))
+            M_MiningGame.Instance.StartMining(currentGround.GetMineralType(other.transform));
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Mine"))
-        {
-            timer_mining = 0;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isOnGround = false;
-        }
-
+        //if (other.gameObject.CompareTag("Mine"))
+        //{
+        //    timer_mining = 0;
+        //}
     }
 }

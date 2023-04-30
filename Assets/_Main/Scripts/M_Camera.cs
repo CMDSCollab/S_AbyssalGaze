@@ -5,6 +5,7 @@ using UnityEngine;
 public class M_Camera : Singleton<M_Camera>
 {
     private float verDistanceOffset;
+    [SerializeField] Transform cam_MiniMap;
 
     void Start()
     {
@@ -13,6 +14,8 @@ public class M_Camera : Singleton<M_Camera>
 
     void Update()
     {
-        transform.position = new Vector3(M_Machine.Instance.transform.position.x, M_Machine.Instance.transform.position.y + verDistanceOffset, M_Machine.Instance.transform.position.z);
+        Vector3 newMachinePos = M_Machine.Instance.transform.position;
+        transform.position = new Vector3(newMachinePos.x, newMachinePos.y + verDistanceOffset, newMachinePos.z);
+        cam_MiniMap.position = new Vector3(newMachinePos.x, cam_MiniMap.position.y, newMachinePos.z);
     }
 }

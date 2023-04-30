@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e708fe8617b4764bafb0b362b4ef43b, type: 3}
+  m_Name: Repository
+  m_EditorClassIdentifier: 
+  minerals:
+  - image: {fileID: 215100138, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 0
+    minDepth: 0
+    maxDepth: 3
+    emergePossibility: 5
+    lightColor: {r: 0.2747864, g: 0.8962264, b: 0.80052567, a: 1}
+    difficulty: 1
+  - image: {fileID: 47233812, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 1
+    minDepth: 0
+    maxDepth: 4
+    emergePossibility: 8
+    lightColor: {r: 0.9150943, g: 0.9150943, b: 0.375534, a: 1}
+    difficulty: 2
+  - image: {fileID: 1260643435, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 2
+    minDepth: 0
+    maxDepth: 5
+    emergePossibility: 9
+    lightColor: {r: 0.25085047, g: 0.9150943, b: 0.17697577, a: 1}
+    difficulty: 3
+  - image: {fileID: 357142160, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 3
+    minDepth: 1
+    maxDepth: 4
+    emergePossibility: 5
+    lightColor: {r: 0.2776789, g: 0.7001618, b: 0.9056604, a: 0}
+    difficulty: 4
+  - image: {fileID: -56305625, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 4
+    minDepth: 3
+    maxDepth: 6
+    emergePossibility: 3
+    lightColor: {r: 0.8773585, g: 0.25244746, b: 0.73599315, a: 1}
+    difficulty: 5
+  - image: {fileID: 427876467, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 5
+    minDepth: 5
+    maxDepth: 8
+    emergePossibility: 8
+    lightColor: {r: 0.9150943, g: 0.68149537, b: 0.33236915, a: 1}
+    difficulty: 6
+  - image: {fileID: -177480645, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 6
+    minDepth: 2
+    maxDepth: 6
+    emergePossibility: 2
+    lightColor: {r: 0.66033155, g: 0.16967781, b: 0.8773585, a: 0}
+    difficulty: 7
+  - image: {fileID: 259775324, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 7
+    minDepth: 3
+    maxDepth: 9
+    emergePossibility: 4
+    lightColor: {r: 0.9528302, g: 0.4604112, b: 0.27416337, a: 1}
+    difficulty: 8
+  - image: {fileID: 264458706, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 8
+    minDepth: 4
+    maxDepth: 8
+    emergePossibility: 4
+    lightColor: {r: 0.8396226, g: 0.13069598, b: 0.13069598, a: 1}
+    difficulty: 9
+  - image: {fileID: 709052735, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
+    type: 9
+    minDepth: 4
+    maxDepth: 10
+    emergePossibility: 3
+    lightColor: {r: 0.6798249, g: 0.8773585, b: 0.15312389, a: 1}
+    difficulty: 10

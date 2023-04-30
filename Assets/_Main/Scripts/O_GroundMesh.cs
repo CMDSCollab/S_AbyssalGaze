@@ -12,14 +12,21 @@ public class O_GroundMesh : MonoBehaviour
     public float xRange;
     public float zRange;
     public int xVerticesDensity;
+    private int depthIndex;
 
-    void Start()
+    private List<Transform> spawnSpots = new List<Transform>();
+    private Dictionary<Transform, MineralType> getMineralType = new Dictionary<Transform, MineralType>();
+
+    public void InitializeGroundValue(int targetDepth)
     {
         newMesh = new Mesh();
         GetComponent<MeshFilter>().mesh = newMesh;
         CreateMeshShape();
         UpdateMeshShape();
-        GenerateMineSpot();
+        Transform triggerParent = M_Mineral.Instance.GenerateMineSpot(transform.position.y);
+        foreach (SphereCollider sc in triggerParent.GetComponentsInChildren<SphereCollider>()) spawnSpots.Add(sc.transform);
+        depthIndex = targetDepth;
+        MineralSpotsGeneration();
     }
 
     void CreateMeshShape()
@@ -107,16 +114,78 @@ public class O_GroundMesh : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = newMesh;
     }
 
-    void GenerateMineSpot()
+    private void MineralSpotsGeneration()
     {
-        int spawnNumber = Random.Range(M_Mineral.Instance.spawnNum - 1, M_Mineral.Instance.spawnNum + 1);
-        for (int i = 0; i < spawnNumber; i++)
+        float mineDistributionRatio = Random.Range(0.1f, 0.2f);
+        int spotsInTotal = spawnSpots.Count;
+        int spotsForMine = Mathf.RoundToInt(spotsInTotal * mineDistributionRatio);
+        //Debug.Log(spotsInTotal + "  " + spotsForMine);
+        List<Transform> residueSpots = spawnSpots;
+        List<Transform> toMineSpots = new List<Transform>();
+
+        List<MineralInfo> permitedMinerals = GetMineralList(depthIndex);
+        int totalPossibility = 0;
+        foreach (MineralInfo mine in permitedMinerals) totalPossibility += mine.emergePossibility;
+
+        for (int i = 0; i < spotsForMine; i++)
         {
-            //int randomVertex = Random.Range(2, vertices.Length - 2);
-            //float randomZ = Random.Range(M_Mineral.instance.posShrinkage, newMesh.vertices[randomVertex].z);
-            //Vector3 spawnPos = new Vector3(newMesh.vertices[randomVertex].x, transform.position.y + 0.1f, randomZ);
-            Transform trans = Instantiate(M_Mineral.Instance.pre_Mineral, transform).transform;
-            trans.localPosition = new Vector3(Random.Range(2, 17.3f), 0.1f, Random.Range(4, 7.1f));
+            MineralInfo mineralToSpawn = permitedMinerals[GetRandomMineral()];
+
+            int randomSpot = Random.Range(0, residueSpots.Count);
+            Transform newMineSpot = residueSpots[randomSpot];
+            toMineSpots.Add(newMineSpot);
+            residueSpots.Remove(newMineSpot);
+
+            newMineSpot.tag = "Mineral";
+            getMineralType.Add(newMineSpot, mineralToSpawn.type);
+
+            //GameObject lightingObj = new GameObject();
+            //lightingObj.transform.SetParent(newMineSpot);
+            //lightingObj.transform.localPosition = new Vector3(0, 5, 0);
+            //Light newLighting = lightingObj.AddComponent<Light>();
+            //newLighting.type = LightType.Spot;
+            //newLighting.color = mineralToSpawn.lightColor;
+            //newLighting.intensity = 40;
+            //lightingObj.transform.rotation = Quaternion.Euler(90, 0, 0);
         }
+
+        foreach (Transform transform in residueSpots) Destroy(transform.gameObject, 0.2f);
+
+        int GetRandomMineral()
+        {
+            int counter = 0;
+            int randomMineralArea = Random.Range(0, totalPossibility);
+            for (int i = 0; i < permitedMinerals.Count; i++)
+            {
+                counter += permitedMinerals[i].emergePossibility;
+                if (randomMineralArea <= counter) return i;
+                else continue;
+            }
+            return 0;
+        }
+    }
+
+    private List<MineralInfo> GetMineralList(int depth)
+    {
+        List<MineralInfo> permitedMinerals = new List<MineralInfo>();
+        foreach (MineralInfo mineralInfo in M_Major.Instance.repository.minerals)
+        {
+            if (mineralInfo.minDepth <= depth && mineralInfo.maxDepth >= depth)
+            {
+                permitedMinerals.Add(mineralInfo);
+            }
+        }
+        return permitedMinerals;
+    }
+
+    private void OnDestroy()
+    {
+        //if (triggerParent!= null) Destroy(triggerParent.gameObject);
+    }
+
+    public MineralType GetMineralType(Transform transform)
+    {
+        if (getMineralType.ContainsKey(transform)) return getMineralType[transform];
+        else return MineralType.M10;
     }
 }
