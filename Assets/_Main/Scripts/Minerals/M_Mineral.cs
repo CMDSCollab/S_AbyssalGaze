@@ -19,11 +19,6 @@ public class M_Mineral : Singleton<M_Mineral>
 
     public Transform parent_MineralColliders;
 
-    private void Start()
-    {
-        GenerateCirclePivots();
-    }
-
     public void GenerateCirclePivots()
     {
         circleSize = mapping_WorldLength / mapping_Density;
@@ -44,14 +39,11 @@ public class M_Mineral : Singleton<M_Mineral>
     {
         Transform newLayer = new GameObject().transform;
         newLayer.name = "Layer: " + targetY;
-        //Debug.Log("dasda:" + circlePivots.Count);
         foreach (Vector2 pivot in circlePivots)
         {
-            //Debug.Log("entered");
             Vector3 spawnPivot = new Vector3(pivot.x, targetY, pivot.y);
             if (Physics.OverlapSphere(spawnPivot, circleRadius, groundLayer).Length != 0)
             {
-                //Debug.Log("dsadsadsdasdasdasdas");
                 GameObject newSphere = new GameObject();
                 newSphere.name = "Sphere: " + pivot.x + " " + pivot.y;
                 newSphere.AddComponent<SphereCollider>().radius = circleRadius;

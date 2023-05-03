@@ -30,25 +30,25 @@ public class M_GroundMesh : MonoBehaviour
         if (previousLevelPosIndex >= 4) previousLevelPosIndex = 0;
     }
 
-    public Vector2 GetArcPoint(Vector2 lpRect, float angle)
-    {
-        Vector2 pt = new Vector2();
-        float a = lpRect.x / 2f;
-        float b = lpRect.y / 2f;
-        if (a == 0 || b == 0) return new Vector2(lpRect.x, lpRect.y);
+    //public Vector2 GetArcPoint(Vector2 lpRect, float angle)
+    //{
+    //    Vector2 pt = new Vector2();
+    //    float a = lpRect.x / 2f;
+    //    float b = lpRect.y / 2f;
+    //    if (a == 0 || b == 0) return new Vector2(lpRect.x, lpRect.y);
 
-        float radian = angle * Mathf.PI / 180.0f;
-        float yc = Mathf.Sin(radian);
-        float xc = Mathf.Cos(radian);
-        float radio = (a * b) / Mathf.Sqrt(Mathf.Pow(yc * a, 2) + Mathf.Pow(xc * b, 2));
+    //    float radian = angle * Mathf.PI / 180.0f;
+    //    float yc = Mathf.Sin(radian);
+    //    float xc = Mathf.Cos(radian);
+    //    float radio = (a * b) / Mathf.Sqrt(Mathf.Pow(yc * a, 2) + Mathf.Pow(xc * b, 2));
 
-        float ax = radio * xc;
-        float ay = radio * yc;
-        pt.x = (int)(lpRect.x + a + ax);
-        pt.y = (int)(lpRect.y + b + ay);
+    //    float ax = radio * xc;
+    //    float ay = radio * yc;
+    //    pt.x = (int)(lpRect.x + a + ax);
+    //    pt.y = (int)(lpRect.y + b + ay);
         
-        return pt;
-    }
+    //    return pt;
+    //}
 
     public void DestroyUpperGround()
     {

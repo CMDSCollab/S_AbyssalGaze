@@ -20,6 +20,8 @@ MonoBehaviour:
     emergePossibility: 5
     lightColor: {r: 0.2747864, g: 0.8962264, b: 0.80052567, a: 1}
     difficulty: 1
+    shrinkSpeed: 4
+    miningTime: 10
   - image: {fileID: 47233812, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 1
     minDepth: 0
@@ -27,6 +29,8 @@ MonoBehaviour:
     emergePossibility: 8
     lightColor: {r: 0.9150943, g: 0.9150943, b: 0.375534, a: 1}
     difficulty: 2
+    shrinkSpeed: 4
+    miningTime: 10
   - image: {fileID: 1260643435, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 2
     minDepth: 0
@@ -34,6 +38,8 @@ MonoBehaviour:
     emergePossibility: 9
     lightColor: {r: 0.25085047, g: 0.9150943, b: 0.17697577, a: 1}
     difficulty: 3
+    shrinkSpeed: 4
+    miningTime: 10
   - image: {fileID: 357142160, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 3
     minDepth: 1
@@ -41,6 +47,8 @@ MonoBehaviour:
     emergePossibility: 5
     lightColor: {r: 0.2776789, g: 0.7001618, b: 0.9056604, a: 0}
     difficulty: 4
+    shrinkSpeed: 4
+    miningTime: 10
   - image: {fileID: -56305625, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 4
     minDepth: 3
@@ -48,6 +56,8 @@ MonoBehaviour:
     emergePossibility: 3
     lightColor: {r: 0.8773585, g: 0.25244746, b: 0.73599315, a: 1}
     difficulty: 5
+    shrinkSpeed: 2
+    miningTime: 2
   - image: {fileID: 427876467, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 5
     minDepth: 5
@@ -55,6 +65,8 @@ MonoBehaviour:
     emergePossibility: 8
     lightColor: {r: 0.9150943, g: 0.68149537, b: 0.33236915, a: 1}
     difficulty: 6
+    shrinkSpeed: 2
+    miningTime: 2
   - image: {fileID: -177480645, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 6
     minDepth: 2
@@ -62,6 +74,8 @@ MonoBehaviour:
     emergePossibility: 2
     lightColor: {r: 0.66033155, g: 0.16967781, b: 0.8773585, a: 0}
     difficulty: 7
+    shrinkSpeed: 2
+    miningTime: 2
   - image: {fileID: 259775324, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 7
     minDepth: 3
@@ -69,6 +83,8 @@ MonoBehaviour:
     emergePossibility: 4
     lightColor: {r: 0.9528302, g: 0.4604112, b: 0.27416337, a: 1}
     difficulty: 8
+    shrinkSpeed: 2
+    miningTime: 2
   - image: {fileID: 264458706, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 8
     minDepth: 4
@@ -76,6 +92,8 @@ MonoBehaviour:
     emergePossibility: 4
     lightColor: {r: 0.8396226, g: 0.13069598, b: 0.13069598, a: 1}
     difficulty: 9
+    shrinkSpeed: 2
+    miningTime: 2
   - image: {fileID: 709052735, guid: 80a04245226cccd4aa86a7eb56eefc31, type: 3}
     type: 9
     minDepth: 4
@@ -83,3 +101,5 @@ MonoBehaviour:
     emergePossibility: 3
     lightColor: {r: 0.6798249, g: 0.8773585, b: 0.15312389, a: 1}
     difficulty: 10
+    shrinkSpeed: 2
+    miningTime: 2

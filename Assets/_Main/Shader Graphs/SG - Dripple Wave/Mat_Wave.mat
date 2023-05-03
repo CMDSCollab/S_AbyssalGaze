@@ -58,5 +58,5 @@ Material:
     - _SizeRatio: 1
     - _Speed: 0.4
     m_Colors:
-    - _FocalPoint: {r: 0.2993863, g: 0.21387377, b: 0, a: 0}
+    - _FocalPoint: {r: 0.35643572, g: 0.7819076, b: 0, a: 0}
   m_BuildTextureStacks: []

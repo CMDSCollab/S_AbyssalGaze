@@ -11,11 +11,6 @@ public class M_Depth : Singleton<M_Depth>
     public int initialLayers;
     public float apartYDistance;
 
-    private void Start()
-    {
-        GenerateIntinialLevel();
-    }
-
     public void GetCurrentDepth(float targetValue)
     {
         currentDepth = targetValue;

@@ -13,7 +13,9 @@ public class M_Machine : Singleton<M_Machine>
     private bool isOnGround = false;
     public float MiningTime;
     private float timer_mining;
+    [HideInInspector]public bool isOnMining = false;
     private O_GroundMesh currentGround;
+    private static GameObject currentMine;
 
 
     public Action<float> MachineOnDive;
@@ -33,6 +35,12 @@ public class M_Machine : Singleton<M_Machine>
 
         if (!isOnGround) MachineOnDive(transform.position.y);
         else MachineOnGround();
+
+        if (currentMine != null && Input.GetKeyDown(KeyCode.Space) && !isOnMining)
+        {
+            M_MiningGame.Instance.StartMining(currentGround.GetMineralType(currentMine.transform));
+            isOnMining = true;
+        }
     }
 
     public void MachineMovement()
@@ -68,6 +76,12 @@ public class M_Machine : Singleton<M_Machine>
         {
             MachineOnHit(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("Mineral"))
+        {
+            currentMine = other.gameObject;
+            Debug.Log("There is Mineral");
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -82,20 +96,14 @@ public class M_Machine : Singleton<M_Machine>
         //        timer_mining = 0;
         //    }
         //}
-
-        if (other.gameObject.CompareTag("Mineral") )
-        {
-            Debug.Log("There is Mineral");
-            if (Input.GetKeyDown(KeyCode.Space))
-            M_MiningGame.Instance.StartMining(currentGround.GetMineralType(other.transform));
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.gameObject.CompareTag("Mine"))
-        //{
-        //    timer_mining = 0;
-        //}
+        if (other.gameObject.CompareTag("Mineral"))
+        {
+            currentMine = null;
+            Debug.Log("Leaved the Mineral");
+        }
     }
 }
