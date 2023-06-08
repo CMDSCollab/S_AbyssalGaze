@@ -6,9 +6,12 @@ public class M_Firearm : MonoBehaviour
 {
     public Transform parent_Firearm;
     public Transform parent_Rotation;
-    public GameObject[] firearmList;
+    public GunList[] firearmList;
+
     public GameObject pre_Bullet;
     private Transform currentFirearm;
+    private static GunType currentType;
+    private static int currentIndex;
 
     private Vector3 aimDirection;
 
@@ -17,7 +20,6 @@ public class M_Firearm : MonoBehaviour
         EquipWeapon(0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -33,37 +35,64 @@ public class M_Firearm : MonoBehaviour
         {
             Firing();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SwitchWeapon(1);
+        }
     }
 
     void EquipWeapon(int weaponIndex)
     {
-        currentFirearm = Instantiate(firearmList[weaponIndex], parent_Firearm).transform;
+        if (currentFirearm != null) Destroy(currentFirearm.gameObject);
+
+        currentFirearm = Instantiate(firearmList[weaponIndex].pre_Gun, parent_Firearm).transform;
+        currentType = firearmList[weaponIndex].gunType;
+        currentIndex = weaponIndex;
     }
 
     void Firing()
     {
-        GameObject bullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
-        bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection,5);
+        switch (currentType)
+        {
+            case GunType.Rifle:
+                GameObject bullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
+                bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
+                break;
+            case GunType.Shot:
+                for (int i = 0; i < 5; i++)
+                {
+                    GameObject shotBullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
+                    if (i < 2) shotBullet.transform.Rotate(Vector3.forward, -20 * (i + 1));
+                    else if (i > 2) shotBullet.transform.Rotate(Vector3.forward, 20 * (i - 2));
+
+                    shotBullet.GetComponent<O_Bullet>().BulletSetUp(shotBullet.transform.up, 5);
+                }
+                break;
+            case GunType.Mini:
+                GameObject miniBulletLeft = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Left"));
+                GameObject miniBulletRight = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Right"));
+                miniBulletLeft.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
+                miniBulletRight.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
+                break;
+            case GunType.Laser:
+                break;
+        }
     }
-    //float Angle_360(Vector3 from_, Vector3 to_)
-    //{
-    //    //两点的x、y值
-    //    float x = from_.x - to_.x;
-    //    float z = from_.z - to_.z;
 
-    //    //斜边长度
-    //    float hypotenuse = Mathf.Sqrt(Mathf.Pow(x, 2f) + Mathf.Pow(z, 2f));
-
-    //    //求出弧度
-    //    float cos = x / hypotenuse;
-    //    float radian = Mathf.Acos(cos);
-
-    //    //用弧度算出角度    
-    //    float angle = 180 / (Mathf.PI / radian);
-
-    //    if (z < 0) angle = -angle;
-    //    else if ((z == 0) && (x < 0)) angle = 180;
-
-    //    return angle;
-    //}
+    void SwitchWeapon(int IndexChangeAmount)
+    {
+        currentIndex += IndexChangeAmount;
+        if (currentIndex > 3) currentIndex = 0;
+        EquipWeapon(currentIndex);
+    }
 }
+
+[System.Serializable]
+public class GunList
+{
+    public GameObject pre_Gun;
+    public GunType gunType;
+}
+
+public enum GunType { Rifle, Shot, Mini, Laser }

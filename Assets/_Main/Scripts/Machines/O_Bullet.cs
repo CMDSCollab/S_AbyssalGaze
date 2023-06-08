@@ -6,12 +6,17 @@ public class O_Bullet : MonoBehaviour
 {
     private Vector3 shootDir;
     private float bulletSpeed;
+    private float lifeSpan = 5;
+    [HideInInspector] public float damage;
 
     public void BulletSetUp(Vector3 shootDirection,float speed)
     {
         shootDir = shootDirection;
         bulletSpeed = speed;
+        damage = 5;
         transform.SetParent(null);
+
+        Destroy(gameObject, lifeSpan);
     }
 
     private void Update()

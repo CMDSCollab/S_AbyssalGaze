@@ -32,6 +32,7 @@ public class M_MiningGame : Singleton<M_MiningGame>
     private float miningTimer;
     private float inGreenTimer;
     private int mineralToGet;
+    private MineralType currentMineralType;
 
     public float XPosToExpandPerPress = 40;
     public int maxDifficulty = 10;
@@ -122,6 +123,8 @@ public class M_MiningGame : Singleton<M_MiningGame>
     void GameEndFeedback()
     {
         isGameRunning = false;
+        M_MineralPanel.Instance.UpdateOnPanelMineralInfo(currentMineralType, mineralToGet);
+        M_Machine.Instance.CurrentMineMiningFinished();
     }
 
     void CloseMiningPanel()
@@ -132,6 +135,7 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
     void RefleshOnPanelElements(MineralType targetMineral)
     {
+        currentMineralType = targetMineral;
         MineralInfo mInfo = GetMineralInfoBaseOnType(targetMineral);
         float upperBarWidth = upperBar.rect.width;
 

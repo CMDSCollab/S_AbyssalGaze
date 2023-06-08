@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class M_Mineral : Singleton<M_Mineral>
 {
@@ -52,6 +53,8 @@ public class M_Mineral : Singleton<M_Mineral>
                 newSphere.transform.SetParent(newLayer);
             }
         }
+        M_Enemy.Instance.TurretGeneration(newLayer);
+
         newLayer.SetParent(parent_MineralColliders);
         return newLayer;
     }

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class M_MineralPanel : Singleton<M_MineralPanel>
 {
     public Transform panel_Mineral;
     private List<OnPanelMineralData> onPanelMinerals = new List<OnPanelMineralData>();
+    private bool isMineralOpened = true;
 
     public void InitializeMineralPanel()
     {
@@ -27,9 +29,34 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
         }
     }
 
-    public void UpdateOnPanelMineralInfo()
+    public void UpdateOnPanelMineralInfo(MineralType targetMineralType, int mineralToAdd)
     {
+        foreach (OnPanelMineralData mineralData in onPanelMinerals)
+            if (mineralData.type == targetMineralType) OnPanelMineralValueChange(mineralData, mineralToAdd);
+    }
 
+    private void OnPanelMineralValueChange(OnPanelMineralData targetData,int changeAmount)
+    {
+        targetData.value += changeAmount;
+        targetData.text.text = targetData.value.ToString();
+    }
+
+    public void MineralPanel_Open()
+    {
+        panel_Mineral.DOScale(Vector3.one, 0.5f);
+        isMineralOpened = true;
+    }
+
+    public void MineralPanel_Close()
+    {
+        panel_Mineral.DOScale(Vector3.zero, 0.5f);
+        isMineralOpened = false;
+    }
+
+    public void OnMineralButtonClick()
+    {
+        if (isMineralOpened) MineralPanel_Close();
+        else MineralPanel_Open();
     }
 }
 
@@ -39,7 +66,7 @@ public class OnPanelMineralData{
     public Image image;
     public int value;
 
-    public OnPanelMineralData(MineralType _type,TMPro.TMP_Text _text,Image _image,int _value)
+    public OnPanelMineralData(MineralType _type, TMPro.TMP_Text _text, Image _image, int _value)
     {
         type = _type;
         text = _text;

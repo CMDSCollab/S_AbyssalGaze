@@ -26,7 +26,6 @@ public class M_Machine : Singleton<M_Machine>
     void Start()
     {
         rb = GetComponent<Rigidbody>();
- 
     }
 
     void Update()
@@ -80,7 +79,7 @@ public class M_Machine : Singleton<M_Machine>
         if (other.gameObject.CompareTag("Mineral"))
         {
             currentMine = other.gameObject;
-            Debug.Log("There is Mineral");
+            //Debug.Log("There is Mineral");
         }
     }
 
@@ -103,7 +102,13 @@ public class M_Machine : Singleton<M_Machine>
         if (other.gameObject.CompareTag("Mineral"))
         {
             currentMine = null;
-            Debug.Log("Leaved the Mineral");
+            //Debug.Log("Leaved the Mineral");
         }
+    }
+
+    public void CurrentMineMiningFinished()
+    {
+        Destroy(currentMine, 0.5f);
+        currentMine = null;
     }
 }

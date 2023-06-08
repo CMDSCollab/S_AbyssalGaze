@@ -51,12 +51,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Magnification: 0.07
+    - _Magnification: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Size: 0.05
-    - _SizeRatio: 1
-    - _Speed: 0.4
+    - _Size: 0
+    - _SizeRatio: 0
+    - _Speed: 0
+    - _TimeControl: 0
     m_Colors:
-    - _FocalPoint: {r: 0.35643572, g: 0.7819076, b: 0, a: 0}
+    - _FocalPoint: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

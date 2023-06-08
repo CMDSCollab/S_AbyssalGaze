@@ -116,7 +116,7 @@ public class O_GroundMesh : MonoBehaviour
 
     private void MineralSpotsGeneration()
     {
-        Debug.Log("entered");
+        //Debug.Log("entered");
         float mineDistributionRatio = Random.Range(0.1f, 0.2f);
         int spotsInTotal = spawnSpots.Count;
         int spotsForMine = Mathf.RoundToInt(spotsInTotal * mineDistributionRatio);

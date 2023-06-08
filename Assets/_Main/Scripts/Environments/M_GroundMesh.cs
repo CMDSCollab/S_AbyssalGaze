@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class M_GroundMesh : MonoBehaviour
+public class M_GroundMesh : Singleton<M_GroundMesh>
 {
     public GameObject pre_GroundMesh;
     public Transform parent_Ground;
@@ -11,6 +12,14 @@ public class M_GroundMesh : MonoBehaviour
 
     private bool isPreviousGroundUpper = false;
     private Transform bottom;
+    public Action DestroyUpperGround;
+
+    private void Start()
+    {
+        DestroyUpperGround += () => Destroy(parent_Ground.GetChild(0).gameObject);
+        DestroyUpperGround += () => Destroy(M_Mineral.Instance.parent_MineralColliders.GetChild(0).gameObject);
+        DestroyUpperGround += () => M_Enemy.Instance.ClearUpperLayerEnemys();
+    }
 
     public void GenerateGroundInDepth(int targetDepth, float apartYDistance)
     {
@@ -20,7 +29,7 @@ public class M_GroundMesh : MonoBehaviour
         float zOffset = (newPlane.GetComponent<O_GroundMesh>().zRange / 2) * newPlane.localScale.z;
         newPlane.position -= new Vector3(xOffset, 0, zOffset);
 
-        newPlane.RotateAround(Vector3.zero, Vector3.up, isPreviousGroundUpper ? Random.Range(0, 180) : Random.Range(180, 360));
+        newPlane.RotateAround(Vector3.zero, Vector3.up, isPreviousGroundUpper ? UnityEngine.Random.Range(0, 180) : UnityEngine.Random.Range(180, 360));
         newPlane.gameObject.layer = LayerMask.NameToLayer("Ground");
         newPlane.position -= newPlane.forward * 0.5f;
 
@@ -50,8 +59,9 @@ public class M_GroundMesh : MonoBehaviour
     //    return pt;
     //}
 
-    public void DestroyUpperGround()
-    {
-        Destroy(parent_Ground.GetChild(0).gameObject);
-    }
+    //public void DestroyUpperGround()
+    //{
+    //    ;
+    //    Destroy()
+    //}
 }
