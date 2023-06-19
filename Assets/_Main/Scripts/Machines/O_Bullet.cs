@@ -11,11 +11,10 @@ public class O_Bullet : MonoBehaviour
 
     public void BulletSetUp(Vector3 shootDirection,float speed)
     {
-        shootDir = shootDirection;
+        shootDir = shootDirection.normalized;
         bulletSpeed = speed;
         damage = 5;
         transform.SetParent(null);
-
         Destroy(gameObject, lifeSpan);
     }
 

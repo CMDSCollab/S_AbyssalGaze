@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4199ae0e3b71aed4ca48960f15fb7248, type: 3}
+  m_Name: S_C_5
+  m_EditorClassIdentifier: 
+  skillName: B5
+  skillIcon: {fileID: -1373617369, guid: 1e95c85b8c1b7f841a0d1a55fbc658c4, type: 3}
+  skillDes: Unlock ballistics shell, 25% chance of not taking DMG when hit by a ranged
+    attack
+  SkillInfo:
+    skillType: 2
+    targetType: 5
+  upgradeRequires:
+  - mineralType: 5
+    number: 6
+  - mineralType: 7
+    number: 7
+  - mineralType: 8
+    number: 8
+  - mineralType: 9
+    number: 4

@@ -7,7 +7,7 @@ using DG.Tweening;
 public class M_MineralPanel : Singleton<M_MineralPanel>
 {
     public Transform panel_Mineral;
-    private List<OnPanelMineralData> onPanelMinerals = new List<OnPanelMineralData>();
+   [HideInInspector] public List<OnPanelMineralData> onPanelMinerals = new List<OnPanelMineralData>();
     private bool isMineralOpened = true;
 
     public void InitializeMineralPanel()
@@ -43,13 +43,13 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
 
     public void MineralPanel_Open()
     {
-        panel_Mineral.DOScale(Vector3.one, 0.5f);
+        panel_Mineral.DOScale(Vector3.one, 0.2f);
         isMineralOpened = true;
     }
 
     public void MineralPanel_Close()
     {
-        panel_Mineral.DOScale(Vector3.zero, 0.5f);
+        panel_Mineral.DOScale(Vector3.zero, 0.2f);
         isMineralOpened = false;
     }
 
@@ -57,6 +57,17 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
     {
         if (isMineralOpened) MineralPanel_Close();
         else MineralPanel_Open();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            foreach (OnPanelMineralData panelMineral in onPanelMinerals)
+            {
+                OnPanelMineralValueChange(panelMineral, 100);
+            }
+        }
     }
 }
 

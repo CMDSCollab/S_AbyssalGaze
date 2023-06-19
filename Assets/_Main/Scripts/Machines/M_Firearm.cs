@@ -9,6 +9,7 @@ public class M_Firearm : MonoBehaviour
     public GunList[] firearmList;
 
     public GameObject pre_Bullet;
+    public GameObject fx_MuzzleFlash;
     private Transform currentFirearm;
     private static GunType currentType;
     private static int currentIndex;
@@ -56,13 +57,16 @@ public class M_Firearm : MonoBehaviour
         switch (currentType)
         {
             case GunType.Rifle:
+                GameObject muzzleFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle"));
                 GameObject bullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
-                bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
+                bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 10);
                 break;
             case GunType.Shot:
                 for (int i = 0; i < 5; i++)
                 {
+                    GameObject shotFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle"));
                     GameObject shotBullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
+
                     if (i < 2) shotBullet.transform.Rotate(Vector3.forward, -20 * (i + 1));
                     else if (i > 2) shotBullet.transform.Rotate(Vector3.forward, 20 * (i - 2));
 
@@ -70,10 +74,12 @@ public class M_Firearm : MonoBehaviour
                 }
                 break;
             case GunType.Mini:
+                GameObject leftFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle Left"));
+                GameObject rightFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle Right"));
                 GameObject miniBulletLeft = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Left"));
                 GameObject miniBulletRight = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Right"));
-                miniBulletLeft.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
-                miniBulletRight.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 5);
+                miniBulletLeft.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 8);
+                miniBulletRight.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 8);
                 break;
             case GunType.Laser:
                 break;

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4199ae0e3b71aed4ca48960f15fb7248, type: 3}
+  m_Name: S_A_4
+  m_EditorClassIdentifier: 
+  skillName: B5
+  skillIcon: {fileID: 497590415, guid: 1e95c85b8c1b7f841a0d1a55fbc658c4, type: 3}
+  skillDes: Repair Cost - 30%
+  SkillInfo:
+    skillType: 8
+    targetType: 4
+  upgradeRequires:
+  - mineralType: 2
+    number: 5
+  - mineralType: 3
+    number: 7
+  - mineralType: 4
+    number: 7
+  - mineralType: 5
+    number: 7
