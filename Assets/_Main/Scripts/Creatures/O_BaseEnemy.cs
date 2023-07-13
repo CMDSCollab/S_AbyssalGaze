@@ -42,4 +42,30 @@ public class O_BaseEnemy : MonoBehaviour
     //        }
     //    }
     //}
+
+    public void DamagedByLaser()
+    {
+        Debug.Log(currentHealth);
+        currentHealth -= Time.deltaTime * 10;
+        if (currentHealth <= 0)
+        {
+            Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
+    protected void DamagedByBullet(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            Debug.Log("OnHit");
+            currentHealth -= collision.gameObject.GetComponentInParent<O_Bullet>().damage;
+            if (currentHealth <= 0)
+            {
+                GameObject explosion = Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
+                Destroy(explosion, 2f);
+                Destroy(gameObject);
+            }
+        }
+    }
 }

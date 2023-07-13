@@ -12,14 +12,12 @@ public class M_Skill : Singleton<M_Skill>
     public Transform panel_Upgrade;
     public GameObject pre_MineralRequire;
     private bool isSkillPanelOpen = false;
-    private bool isSkillUpgradeOpen;
 
     void Start()
     {
         
     }
        
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -70,12 +68,16 @@ public class M_Skill : Singleton<M_Skill>
             newRequire.GetComponent<Image>().sprite = targetMineralImage;
             newRequire.GetComponentInChildren<TMP_Text>().text = require.number.ToString();
 
-            foreach (OnPanelMineralData  onPanelMineral in M_MineralPanel.Instance.onPanelMinerals)
-                if (onPanelMineral.type == require.mineralType && onPanelMineral.value>=require.number) targetRequireTypeCount++;
+            foreach (OnPanelMineralData onPanelMineral in M_MineralPanel.Instance.onPanelMinerals)
+                if (onPanelMineral.type == require.mineralType && onPanelMineral.value >= require.number) targetRequireTypeCount++;
         }
 
         if (targetRequireTypeCount == targetSkill.upgradeRequires.Length)
-            panel_Upgrade.Find("Button").GetComponent<Button>().interactable = true;
+        {
+            if (!O_SkillUI.currentSelectedSkill.GetUnlockState())
+                panel_Upgrade.Find("Button").GetComponent<Button>().interactable = true;
+            else panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
+        }
         else panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
     }
 
@@ -83,5 +85,15 @@ public class M_Skill : Singleton<M_Skill>
     {
         M_MineralPanel.Instance.MineralPanel_Close();
         panel_Upgrade.DOScale(0, 0.2f);
+    }
+
+    public void UpgradeCertainSkill()
+    {
+        O_SkillUI.currentSelectedSkill.UnlockThisSkill();
+        panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
+        foreach (UpgradeRequire require in O_SkillUI.currentSelectedSkill.thisSkillInfo.upgradeRequires)
+            foreach (OnPanelMineralData onPanelMineral in M_MineralPanel.Instance.onPanelMinerals)
+                if (require.mineralType == onPanelMineral.type)
+                    M_MineralPanel.Instance.UpdateOnPanelMineralInfo(require.mineralType, -require.number);
     }
 }

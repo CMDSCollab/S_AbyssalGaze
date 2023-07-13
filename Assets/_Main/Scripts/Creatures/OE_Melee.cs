@@ -25,7 +25,7 @@ public class OE_Melee : O_PatrolEnemy
     protected override void Update()
     {
         base.Update();
-        if (isWingStageFinished) WingAction(isWingUpperwards, wingSpeed);
+        if (isWingStageFinished && wingSpeed!=0) WingAction(isWingUpperwards, wingSpeed);
     }
 
     private void WingAction(bool isUpperwards, float targetSpeed)
@@ -64,15 +64,7 @@ public class OE_Melee : O_PatrolEnemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Debug.Log("OnHit");
-            currentHealth -= collision.gameObject.GetComponentInParent<O_Bullet>().damage;
-            if (currentHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
+        DamagedByBullet(collision);
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("HitPlayer");

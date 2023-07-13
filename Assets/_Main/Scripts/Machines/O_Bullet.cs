@@ -11,6 +11,8 @@ public class O_Bullet : MonoBehaviour
 
     public void BulletSetUp(Vector3 shootDirection,float speed)
     {
+        //float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0, 0, angle);
         shootDir = shootDirection.normalized;
         bulletSpeed = speed;
         damage = 5;

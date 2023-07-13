@@ -50,7 +50,12 @@ public class OE_Turret : O_BaseEnemy
 
         void ShootBullet(Transform pos)
         {
-            Transform bullet = Instantiate(pre_Bullet, pos.position, Quaternion.identity).transform;
+            Vector2 playerPos = new Vector2(M_Machine.Instance.transform.position.x, M_Machine.Instance.transform.position.z);
+            Vector2 enemyPos = new Vector2(transform.position.x, transform.position.z);
+            Vector2 lookDir = playerPos - enemyPos;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+            Transform bullet = Instantiate(pre_Bullet, pos.position, Quaternion.Euler(90, 180, angle)).transform;
+            //Transform bullet = Instantiate(pre_Bullet, pos.position, Quaternion.identity).transform;
             Vector3 direction = (M_Machine.Instance.transform.position - bullet.transform.position).normalized;
             bullet.GetComponent<Rigidbody>().AddForce(direction * 10, ForceMode.Impulse);
         }
@@ -58,14 +63,6 @@ public class OE_Turret : O_BaseEnemy
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            Debug.Log("OnHit");
-            currentHealth -= collision.gameObject.GetComponentInParent<O_Bullet>().damage;
-            if (currentHealth <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
+        DamagedByBullet(collision);
     }
 }

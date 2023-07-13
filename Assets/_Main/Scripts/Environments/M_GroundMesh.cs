@@ -14,6 +14,12 @@ public class M_GroundMesh : Singleton<M_GroundMesh>
     private Transform bottom;
     public Action DestroyUpperGround;
 
+    public Material mat_L1;
+    public Material mat_L2;
+    public Material mat_L3;
+
+    public int layerChangeCount = 3;
+
     private void Start()
     {
         DestroyUpperGround += () => Destroy(parent_Ground.GetChild(0).gameObject);
@@ -23,20 +29,33 @@ public class M_GroundMesh : Singleton<M_GroundMesh>
 
     public void GenerateGroundInDepth(int targetDepth, float apartYDistance)
     {
-        Vector3 targetPos = new Vector3(0, (targetDepth) * apartYDistance, 0);
-        Transform newPlane = Instantiate(pre_GroundMesh, targetPos, Quaternion.Euler(0, 0, 0), parent_Ground).transform;
-        float xOffset = (newPlane.GetComponent<O_GroundMesh>().xRange / 2) * newPlane.localScale.x;
-        float zOffset = (newPlane.GetComponent<O_GroundMesh>().zRange / 2) * newPlane.localScale.z;
-        newPlane.position -= new Vector3(xOffset, 0, zOffset);
+        if (targetDepth > layerChangeCount * 3)
+        {
+            Vector3 targetPos = new Vector3(0, (targetDepth) * apartYDistance, 0);
+            FindObjectOfType<M_BossFight>().GenerateBossGround(targetPos);
+            DestroyUpperGround();
+        }
+        else
+        {
+            Vector3 targetPos = new Vector3(0, (targetDepth) * apartYDistance, 0);
+            Transform newPlane = Instantiate(pre_GroundMesh, targetPos, Quaternion.Euler(0, 0, 0), parent_Ground).transform;
+            float xOffset = (newPlane.GetComponent<O_GroundMesh>().xRange / 2) * newPlane.localScale.x;
+            float zOffset = (newPlane.GetComponent<O_GroundMesh>().zRange / 2) * newPlane.localScale.z;
+            newPlane.position -= new Vector3(xOffset, 0, zOffset);
 
-        newPlane.RotateAround(Vector3.zero, Vector3.up, isPreviousGroundUpper ? UnityEngine.Random.Range(0, 180) : UnityEngine.Random.Range(180, 360));
-        newPlane.gameObject.layer = LayerMask.NameToLayer("Ground");
-        newPlane.position -= newPlane.forward * 0.5f;
+            newPlane.RotateAround(Vector3.zero, Vector3.up, isPreviousGroundUpper ? UnityEngine.Random.Range(0, 180) : UnityEngine.Random.Range(180, 360));
+            newPlane.gameObject.layer = LayerMask.NameToLayer("Ground");
+            newPlane.position -= newPlane.forward * 0.5f;
 
-        newPlane.GetComponent<O_GroundMesh>().InitializeGroundValue(targetDepth);
-        isPreviousGroundUpper = !isPreviousGroundUpper;
-        previousLevelPosIndex++;
-        if (previousLevelPosIndex >= 4) previousLevelPosIndex = 0;
+            newPlane.GetComponent<O_GroundMesh>().InitializeGroundValue(targetDepth);
+            isPreviousGroundUpper = !isPreviousGroundUpper;
+
+            newPlane.GetComponent<MeshRenderer>().material = (targetDepth < layerChangeCount) ? mat_L1 : (targetDepth < layerChangeCount * 2) ? mat_L2 : mat_L3;
+            FindObjectOfType<O_PlayerFollower>().AlignPos();
+        }
+   
+        //previousLevelPosIndex++;
+        //if (previousLevelPosIndex >= 4) previousLevelPosIndex = 0;
     }
 
     //public Vector2 GetArcPoint(Vector2 lpRect, float angle)

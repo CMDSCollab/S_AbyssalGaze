@@ -82,7 +82,7 @@ public class M_Enemy : Singleton<M_Enemy>
 
     void MeleeGeneration()
     {
-        Debug.Log("New Melee Gen");
+        //Debug.Log("New Melee Gen");
         Vector3 circlePos = GetRandomPos();
         Vector3 spawnPos = new Vector3(Random.Range(0, circlePos.x), circlePos.y, Random.Range(0, circlePos.z));
         Transform newMelee = Instantiate(pre_Melee, spawnPos, Quaternion.Euler(90, 0, 0)).transform;
@@ -99,7 +99,7 @@ public class M_Enemy : Singleton<M_Enemy>
 
     void RangedGeneration()
     {
-        Debug.Log("New Ranged Gen");
+        //Debug.Log("New Ranged Gen");
         Vector3 circlePos = GetRandomPos();
         Vector3 spawnPos = new Vector3(Random.Range(0, circlePos.x), circlePos.y, Random.Range(0, circlePos.z));
         Transform newRanged = Instantiate(pre_Ranged, spawnPos, Quaternion.Euler(90, 0, 0)).transform;

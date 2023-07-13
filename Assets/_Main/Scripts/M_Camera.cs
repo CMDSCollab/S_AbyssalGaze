@@ -7,6 +7,7 @@ public class M_Camera : Singleton<M_Camera>
     private float verDistanceOffset;
     [SerializeField] Transform cam_MiniMap;
 
+
     void Start()
     {
         verDistanceOffset = transform.position.y - M_Machine.Instance.transform.position.y;
