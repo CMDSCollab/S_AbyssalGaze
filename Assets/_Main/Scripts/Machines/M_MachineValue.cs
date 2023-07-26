@@ -14,16 +14,19 @@ public class M_MachineValue : Singleton<M_MachineValue>
     public float oxygenToDecreaseOnHit;
     public float MineralOxygenAmount;
 
+    public Image hpImage;
+
     void Start()
     {
-        slider_Oxygen.maxValue = maxOxygen;
+        //slider_Oxygen.maxValue = maxOxygen;
         currentOxygen = maxOxygen;
-        slider_Oxygen.value = currentOxygen;
+        hpImage.fillAmount = 1;
+        //slider_Oxygen.value = currentOxygen;
     }
 
     private void Update()
     {
-        currentOxygen -= Time.deltaTime;
+        //currentOxygen -= Time.deltaTime;
         SliderTextValueSync();
         if (currentOxygen <= 0) SceneManager.LoadScene(0);
     }
@@ -34,15 +37,37 @@ public class M_MachineValue : Singleton<M_MachineValue>
         text_Oxygen.text = currentOxygen.ToString("f0") + " / " + maxOxygen.ToString();
     }
 
-    public void OxygenDecrease(object obj)
+    //public void OxygenDecrease(object obj)
+    //{
+    //    currentOxygen -= oxygenToDecreaseOnHit;
+    //    if (currentOxygen > maxOxygen) currentOxygen = 0;
+    //}
+
+    //public void OxygenIncrease(object obj)
+    //{
+    //    currentOxygen += MineralOxygenAmount;
+    //    if (currentOxygen > maxOxygen) currentOxygen = maxOxygen;
+    //}
+
+    public void HPDecrease(int amount)
     {
-        currentOxygen -= oxygenToDecreaseOnHit;
-        if (currentOxygen > maxOxygen) currentOxygen = 0;
+        currentOxygen -= amount;
+        hpImage.fillAmount = currentOxygen / maxOxygen;
+
+        if (currentOxygen<=0)
+        {
+            Debug.Log("Player Died");
+            FindObjectOfType<M_BossFight>().AllGameBlack();
+        }
     }
 
-    public void OxygenIncrease(object obj)
+    public void DamagedByLaser()
     {
-        currentOxygen += MineralOxygenAmount;
-        if (currentOxygen > maxOxygen) currentOxygen = maxOxygen;
+        currentOxygen -= Time.deltaTime;
+        hpImage.fillAmount = currentOxygen / maxOxygen;
+        if (currentOxygen <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

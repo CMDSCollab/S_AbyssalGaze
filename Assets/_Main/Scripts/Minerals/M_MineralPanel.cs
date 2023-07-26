@@ -65,7 +65,7 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
         {
             foreach (OnPanelMineralData panelMineral in onPanelMinerals)
             {
-                OnPanelMineralValueChange(panelMineral, 100);
+                OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
             }
         }
     }

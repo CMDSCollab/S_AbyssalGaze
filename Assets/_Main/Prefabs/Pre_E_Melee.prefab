@@ -264,6 +264,7 @@ MonoBehaviour:
   rotateSpeed: 2
   specialActionRange: 5
   wingSpeed: 1
+  damageAmount: 6
   rushSpeed: 10
 --- !u!1 &8319842106278440333
 GameObject:

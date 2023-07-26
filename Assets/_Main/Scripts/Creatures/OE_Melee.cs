@@ -11,7 +11,7 @@ public class OE_Melee : O_PatrolEnemy
     public float wingSpeed;
     private bool isWingUpperwards = true;
     private bool isWingStageFinished = true;
-
+    public int damageAmount;
     public float rushSpeed;
     private float rushTimer;
 

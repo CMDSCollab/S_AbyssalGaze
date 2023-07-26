@@ -11,7 +11,7 @@ public class M_Delegate : Singleton<M_Delegate>
 
         M_Machine.Instance.MachineOnGround += M_Enemy.Instance.EnemyGenerationProcess;
 
-        M_Machine.Instance.MachineOnHit += M_MachineValue.Instance.OxygenDecrease;
-        M_Machine.Instance.MineComplete += M_MachineValue.Instance.OxygenIncrease;
+        //M_Machine.Instance.MachineOnHit += M_MachineValue.Instance.OxygenDecrease;
+        //M_Machine.Instance.MineComplete += M_MachineValue.Instance.OxygenIncrease;
     }
 }

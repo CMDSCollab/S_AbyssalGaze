@@ -44,15 +44,18 @@ public class OE_BossMouth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("OnHit");
+            GameObject hitExplosion = Instantiate(FindObjectOfType<M_Firearm>().fx_ExplosionSmall, collision.transform.position, Quaternion.identity);
+            Destroy(hitExplosion, 2f);
             currentHealth -= collision.gameObject.GetComponentInParent<O_Bullet>().damage;
-            if (currentHealth <= 0 && !isDead) StartCoroutine( BossMouthDefeated());
+            Destroy(collision.transform.parent.gameObject);
+            if (currentHealth <= 0 && !isDead) StartCoroutine(BossMouthDefeated());
         }
     }
 
     IEnumerator BossMouthDefeated()
     {
         isDead = true;
+        M_Audio.PlayOneShotAudio("Boss Death");
         attackTimer = 20000;
         int[] tenIndexes = new int[tentacles.Length];
         for (int i = 0; i < tenIndexes.Length; i++) tenIndexes[i] = i;
@@ -87,11 +90,7 @@ public class OE_BossMouth : MonoBehaviour
     public void DamagedByLaser()
     {
         currentHealth -= Time.deltaTime * 10;
-        if (currentHealth <= 0)
-        {
-            Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        if (currentHealth <= 0 && !isDead) StartCoroutine(BossMouthDefeated());
     }
 
     private void ResetAttackTimer()
@@ -111,6 +110,7 @@ public class OE_BossMouth : MonoBehaviour
         foreach (int tentacle in pokeIndexes)
         {
             ChangeTentaclesState(new int[1] { tentacle }, BossTantacleState.Poke);
+            M_Audio.PlayOneShotAudio("Tentacle Attack");
             yield return new WaitForSeconds(0.5f);
         }
         yield return new WaitForSeconds(0.5f);
@@ -121,6 +121,7 @@ public class OE_BossMouth : MonoBehaviour
 
     private void Poke_MeanTime()
     {
+        M_Audio.PlayOneShotAudio("Tentacle Attack");
         isAttacking = true;
         float[] distances = GetAllTentacleDistance();
         int pokeNum = Random.Range(3, 6);

@@ -45,12 +45,14 @@ public class O_BaseEnemy : MonoBehaviour
 
     public void DamagedByLaser()
     {
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
         currentHealth -= Time.deltaTime * 10;
         if (currentHealth <= 0)
         {
-            Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
+            GameObject explosion = Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
+            Destroy(explosion, 2f);
             Destroy(gameObject);
+            M_Audio.PlayOneShotAudio("Enemy Death");
         }
     }
 
@@ -58,13 +60,17 @@ public class O_BaseEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("OnHit");
+            //Debug.Log("OnHit");
+            GameObject hitExplosion = Instantiate(FindObjectOfType<M_Firearm>().fx_ExplosionSmall, transform.position, Quaternion.identity);
+            Destroy(hitExplosion, 2f);
             currentHealth -= collision.gameObject.GetComponentInParent<O_Bullet>().damage;
+            Destroy(collision.transform.parent.gameObject);
             if (currentHealth <= 0)
             {
                 GameObject explosion = Instantiate(FindObjectOfType<M_Firearm>().fx_Explosion, transform.position, Quaternion.identity);
                 Destroy(explosion, 2f);
                 Destroy(gameObject);
+                M_Audio.PlayOneShotAudio("Enemy Death");
             }
         }
     }

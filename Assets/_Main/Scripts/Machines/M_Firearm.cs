@@ -17,6 +17,7 @@ public class M_Firearm : MonoBehaviour
     private Vector3 aimDirection;
     public LayerMask layer_Laser;
     public GameObject fx_Explosion;
+    public GameObject fx_ExplosionSmall;
 
     void Start()
     {
@@ -63,6 +64,7 @@ public class M_Firearm : MonoBehaviour
                     GameObject muzzleFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle"));
                     GameObject bullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
                     bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 10);
+                    M_Audio.PlayOneShotAudio("Gunshot");
                     break;
                 case GunType.Shot:
                     for (int i = 0; i < 5; i++)
@@ -75,6 +77,7 @@ public class M_Firearm : MonoBehaviour
 
                         shotBullet.GetComponent<O_Bullet>().BulletSetUp(shotBullet.transform.up, 5);
                     }
+                    M_Audio.PlayOneShotAudio("Shotgun");
                     break;
                 case GunType.Mini:
                     GameObject leftFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle Left"));
@@ -83,6 +86,7 @@ public class M_Firearm : MonoBehaviour
                     GameObject miniBulletRight = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Right"));
                     miniBulletLeft.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 8);
                     miniBulletRight.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 8);
+                    M_Audio.PlayOneShotAudio("Gunshot");
                     break;
             }
             M_AmmoRepo.Instance.BulletConsume();
@@ -91,6 +95,7 @@ public class M_Firearm : MonoBehaviour
 
     void EnableLaser()
     {
+        M_Audio.PlayOneShotAudio_StopInCertainTime("Laser");
         Transform muzzle = currentFirearm.Find("Muzzle");
         muzzle.GetChild(0).gameObject.SetActive(true);
         muzzle.GetChild(1).gameObject.SetActive(true);
@@ -115,34 +120,18 @@ public class M_Firearm : MonoBehaviour
 
 
             if (hit.collider.gameObject.GetComponent<O_BaseEnemy>() != null)
-            {
                 hit.collider.gameObject.GetComponent<O_BaseEnemy>().DamagedByLaser();
-            }
+            if (hit.collider.gameObject.GetComponent<OE_BossMouth>() != null)
+                hit.collider.gameObject.GetComponent<OE_BossMouth>().DamagedByLaser();
+            if (hit.collider.gameObject.GetComponent<OE_BossSide>() != null)
+                hit.collider.gameObject.GetComponent<OE_BossSide>().DamagedByLaser();
             M_AmmoRepo.Instance.LaserConsume();
         }
-        //SetBeamHitState(hit.collider.gameObject.layer == layer_Laser);
-
-        //void SetBeamHitState(bool targetState)
-        //{
-        //    if (targetState)
-        //    {
-        //        Debug.Log("entered");
-        //        //muzzle.Find("BeamHit 1").GetComponent<ParticleSystem>().Play();
-        //        //muzzle.Find("BeamHit 2").GetComponent<ParticleSystem>().Play();
-        //        muzzle.Find("BeamHit 1").transform.position = lr.GetPosition(1);
-        //        muzzle.Find("BeamHit 2").transform.position = lr.GetPosition(1);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Beam Disactive");
-        //        //muzzle.Find("BeamHit 1").GetComponent<ParticleSystem>().Stop();
-        //        //muzzle.Find("BeamHit 2").GetComponent<ParticleSystem>().Stop();
-        //    }
-        //}
     }
 
     void DisableLaser()
     {
+        M_Audio.OneShotAudio_StopCertain();
         Transform muzzle = currentFirearm.Find("Muzzle");
         muzzle.GetChild(0).gameObject.SetActive(false);
         muzzle.GetChild(1).gameObject.SetActive(false);

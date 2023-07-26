@@ -21,11 +21,11 @@ public class M_Enemy : Singleton<M_Enemy>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //for (int i = 0; i < 3; i++) RangedGeneration();
-            for (int i = 0; i < 10; i++) MeleeGeneration();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    for (int i = 0; i < 10; i++) RangedGeneration();
+        //    for (int i = 0; i < 20; i++) MeleeGeneration();
+        //}
 
         if (timer > spawnTime)
         {

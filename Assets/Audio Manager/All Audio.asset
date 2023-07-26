@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198196a9fca3f4741a671aa53ce1c054, type: 3}
+  m_Name: All Audio
+  m_EditorClassIdentifier: 
+  audio_Loop:
+  - soundName: Boss
+    audioClip: {fileID: 8300000, guid: 591b56c364e2bb342a4a3932870dfffe, type: 3}
+    volume: 1
+  - soundName: Cover
+    audioClip: {fileID: 8300000, guid: 02742c92c416b9e41b3893dd9fef4db0, type: 3}
+    volume: 1
+  - soundName: Underwater
+    audioClip: {fileID: 8300000, guid: eb2490e4fd6fef447842b9e645ff33ab, type: 3}
+    volume: 1
+  audio_OneShot:
+  - soundName: Eye Open
+    audioClip: {fileID: 8300000, guid: f631eebd02495ff44be40ee46613a952, type: 3}
+    volume: 1
+  - soundName: Boss Death
+    audioClip: {fileID: 8300000, guid: d620797ba8d1c3e48a5f7e77984fe899, type: 3}
+    volume: 1
+  - soundName: Button Click
+    audioClip: {fileID: 8300000, guid: 5d587264cf00a754f9daabf5e4fc83eb, type: 3}
+    volume: 1
+  - soundName: Enemy Death
+    audioClip: {fileID: 8300000, guid: 7e9dadabfbdbd57428d0ae3b0f76ae42, type: 3}
+    volume: 1
+  - soundName: Getting Hit
+    audioClip: {fileID: 8300000, guid: 381458771b3c14e44983c4e4bdbdd94f, type: 3}
+    volume: 1
+  - soundName: Gunshot
+    audioClip: {fileID: 8300000, guid: 4c5ef1e0a044a9e4b9ac598673a4fe10, type: 3}
+    volume: 1
+  - soundName: Shotgun
+    audioClip: {fileID: 8300000, guid: ac2f5d1a922457b4eb3358dc6775274c, type: 3}
+    volume: 1
+  - soundName: Tentacle Attack
+    audioClip: {fileID: 8300000, guid: c4d1e25e6c27ab948aec0179deede699, type: 3}
+    volume: 1
+  - soundName: Laser
+    audioClip: {fileID: 8300000, guid: 4860fad8352695948ab0637b0a90c4b7, type: 3}
+    volume: 1

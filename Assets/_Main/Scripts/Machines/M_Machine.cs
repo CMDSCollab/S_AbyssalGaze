@@ -23,6 +23,8 @@ public class M_Machine : Singleton<M_Machine>
     public Action<object> MachineOnHit;
     public Action<object> MineComplete;
 
+    private bool isBossFightStart = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -58,6 +60,22 @@ public class M_Machine : Singleton<M_Machine>
             isOnGround = true;
             currentGround = collision.gameObject.GetComponent<O_GroundMesh>();
         }
+
+        if (collision.gameObject.CompareTag("BossGround") && !isBossFightStart)
+        {
+            isBossFightStart = true;
+            string[] world1BgAudio = new string[1] { "Boss" };
+            M_Audio.PlayLoopAudio(world1BgAudio);
+        }
+
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            if (collision.gameObject.GetComponent<OE_Melee>() != null)
+            {
+                GetComponent<M_MachineValue>().HPDecrease(collision.gameObject.GetComponent<OE_Melee>().damageAmount);
+                M_Audio.PlayOneShotAudio("Getting Hit");
+            }
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -73,7 +91,11 @@ public class M_Machine : Singleton<M_Machine>
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            MachineOnHit(other.gameObject);
+            if (other.GetComponent<O_EnemyBullet>()!=null)
+            {
+                GetComponent<M_MachineValue>().HPDecrease(other.GetComponent<O_EnemyBullet>().damageAmount);
+                M_Audio.PlayOneShotAudio("Getting Hit");
+            }
         }
 
         if (other.gameObject.CompareTag("Mineral"))

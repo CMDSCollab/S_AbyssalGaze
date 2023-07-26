@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCoolDown: 5
-  maxHealth: 0
+  maxHealth: 100
   mmf_shakeCam: {fileID: 1465236296}
   allBlackHide: {fileID: 0}
 --- !u!1001 &43775934052960719

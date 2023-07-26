@@ -33,7 +33,8 @@ public class M_GroundMesh : Singleton<M_GroundMesh>
         {
             Vector3 targetPos = new Vector3(0, (targetDepth) * apartYDistance, 0);
             FindObjectOfType<M_BossFight>().GenerateBossGround(targetPos);
-            DestroyUpperGround();
+            if (parent_Ground.childCount>0)
+                DestroyUpperGround();
         }
         else
         {
@@ -83,4 +84,5 @@ public class M_GroundMesh : Singleton<M_GroundMesh>
     //    ;
     //    Destroy()
     //}
+
 }
