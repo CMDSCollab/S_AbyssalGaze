@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using UnityEngine.InputSystem;
 
 public class M_MiningGame : Singleton<M_MiningGame>
 {
@@ -41,12 +42,14 @@ public class M_MiningGame : Singleton<M_MiningGame>
     public int twoSideOffset = 10;
 
     public Action GameEnd;
+    private PlayerInput playerInput;
 
     void Start()
     {
         GetReferences();
         GameEnd += GameEndFeedback;
         GameEnd += CloseMiningPanel;
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
     void Update()
@@ -79,7 +82,7 @@ public class M_MiningGame : Singleton<M_MiningGame>
             }
 
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (playerInput.actions["Mine"].triggered)
             {
                 redRight.anchoredPosition += new Vector2(XPosToExpandPerPress, 0);
                 redLeft.anchoredPosition-= new Vector2(XPosToExpandPerPress, 0);

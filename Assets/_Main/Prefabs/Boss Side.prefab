@@ -187,7 +187,7 @@ MonoBehaviour:
   layer_Laser:
     serializedVersion: 2
     m_Bits: 1152
-  maxHealth: 100
+  maxHealth: 700
 --- !u!1001 &1064996788865043511
 PrefabInstance:
   m_ObjectHideFlags: 0

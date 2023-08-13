@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class M_Skill : Singleton<M_Skill>
 {
@@ -12,15 +13,18 @@ public class M_Skill : Singleton<M_Skill>
     public Transform panel_Upgrade;
     public GameObject pre_MineralRequire;
     private bool isSkillPanelOpen = false;
+    private PlayerInput playerInput;
+    private bool isFirstOpen = true;
 
     void Start()
     {
-        
+        playerInput = FindObjectOfType<PlayerInput>();
     }
        
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (playerInput.actions["Skill"].triggered)
+        {
             if (isSkillPanelOpen)
             {
                 Sequence s = DOTween.Sequence();
@@ -37,6 +41,14 @@ public class M_Skill : Singleton<M_Skill>
                 s.AppendInterval(speed_PanelOpen);
                 s.AppendCallback(() => isSkillPanelOpen = true);
             }
+
+            if (isFirstOpen)
+            {
+                FindObjectOfType<M_MineralPanel>().MineralsCheatChange();
+                isFirstOpen = false;
+            }
+        }
+    
     }
 
     public void OpenUpgradePanel(SO_Skill targetSkill)

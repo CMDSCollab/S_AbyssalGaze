@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class M_Firearm : MonoBehaviour
 {
@@ -19,30 +21,53 @@ public class M_Firearm : MonoBehaviour
     public GameObject fx_Explosion;
     public GameObject fx_ExplosionSmall;
 
+    private PlayerInput playerInput;
+    public Image weaponButtonImage;
+    private float fireTimer;
+
     void Start()
     {
+        playerInput = FindObjectOfType<PlayerInput>();
         EquipWeapon(0);
     }
 
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, int.MaxValue))
-        {
-            aimDirection = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(transform.position.x, 0, transform.position.z);
-            float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
-            parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
-        }
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hit;
+        //if (Physics.Raycast(ray, out hit, int.MaxValue))
+        //{
+        //    aimDirection = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(transform.position.x, 0, transform.position.z);
+        //    float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
+        //    parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
+        //}
 
-        if (currentType != GunType.Laser && Input.GetMouseButtonDown(0)) Firing();
+        //if (currentType != GunType.Laser && Input.GetMouseButtonDown(0)) Firing();
+        //if (currentType == GunType.Laser)
+        //{
+        //    if (Input.GetMouseButtonDown(0)) EnableLaser();
+        //    if (Input.GetMouseButton(0)) FiringLaser();
+        //    if (Input.GetMouseButtonUp(0)) DisableLaser();
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.Q)) SwitchWeapon(1);
+
+
+        Vector2 inputDirection = playerInput.actions["Shoot"].ReadValue<Vector2>();
+        aimDirection = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
+        float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
+        parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
+
+        fireTimer -= Time.deltaTime;
+
+        if (currentType != GunType.Laser && aimDirection != Vector3.zero && fireTimer<0) Firing();
         if (currentType == GunType.Laser) {
-            if (Input.GetMouseButtonDown(0)) EnableLaser();
-            if (Input.GetMouseButton(0)) FiringLaser();
-            if (Input.GetMouseButtonUp(0)) DisableLaser();
+            if (aimDirection != Vector3.zero) EnableLaser();
+            if (aimDirection != Vector3.zero) FiringLaser();
+            if (aimDirection == Vector3.zero) DisableLaser();
         } 
 
-        if (Input.GetKeyDown(KeyCode.Q)) SwitchWeapon(1);
+        if (playerInput.actions["Weapon"].triggered) SwitchWeapon(1);
     }
 
     void EquipWeapon(int weaponIndex)
@@ -50,6 +75,7 @@ public class M_Firearm : MonoBehaviour
         if (currentFirearm != null) Destroy(currentFirearm.gameObject);
 
         currentFirearm = Instantiate(firearmList[weaponIndex].pre_Gun, parent_Firearm).transform;
+        weaponButtonImage.sprite = firearmList[weaponIndex].icon;
         currentType = firearmList[weaponIndex].gunType;
         currentIndex = weaponIndex;
     }
@@ -61,12 +87,14 @@ public class M_Firearm : MonoBehaviour
             switch (currentType)
             {
                 case GunType.Rifle:
+                    fireTimer = firearmList[0].fireRate;
                     GameObject muzzleFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle"));
                     GameObject bullet = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle"));
                     bullet.GetComponent<O_Bullet>().BulletSetUp(aimDirection, 10);
                     M_Audio.PlayOneShotAudio("Gunshot");
                     break;
                 case GunType.Shot:
+                    fireTimer = firearmList[1].fireRate;
                     for (int i = 0; i < 5; i++)
                     {
                         GameObject shotFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle"));
@@ -80,6 +108,7 @@ public class M_Firearm : MonoBehaviour
                     M_Audio.PlayOneShotAudio("Shotgun");
                     break;
                 case GunType.Mini:
+                    fireTimer = firearmList[2].fireRate;
                     GameObject leftFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle Left"));
                     GameObject rightFlash = Instantiate(fx_MuzzleFlash, currentFirearm.Find("Muzzle Right"));
                     GameObject miniBulletLeft = Instantiate(pre_Bullet, currentFirearm.Find("Muzzle Left"));
@@ -161,6 +190,8 @@ public class GunList
 {
     public GameObject pre_Gun;
     public GunType gunType;
+    public Sprite icon;
+    public float fireRate;
 }
 
 public enum GunType { Rifle, Shot, Mini, Laser }

@@ -24,8 +24,9 @@ public class M_Depth : Singleton<M_Depth>
             if (GetComponent<M_GroundMesh>().parent_Ground.childCount > 0)
                 GetComponent<M_GroundMesh>().DestroyUpperGround();
         }
-        text_Depth.text = "Depth: " + currentDepth.ToString("f2") + " Layer: " + currentLayer.ToString();
-        txt_Depth.text = currentDepth.ToString("f2");
+        //text_Depth.text = "Depth: " + currentDepth.ToString("f2") + " Layer: " + currentLayer.ToString();
+        //txt_Depth.text = currentDepth.ToString("f2");
+        txt_Depth.text = (int)(currentDepth * 100) + " M";
     }
 
     public void GenerateIntinialLevel()

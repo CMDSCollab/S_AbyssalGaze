@@ -15,6 +15,6 @@ public class O_MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        radar.Rotate(-Vector3.forward, 1);
+        radar.Rotate(-Vector3.forward, 0.1f);
     }
 }

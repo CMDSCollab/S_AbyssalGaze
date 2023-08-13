@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class M_MineralPanel : Singleton<M_MineralPanel>
 {
     public Transform panel_Mineral;
    [HideInInspector] public List<OnPanelMineralData> onPanelMinerals = new List<OnPanelMineralData>();
-    private bool isMineralOpened = true;
+    private bool isMineralOpened = false;
+    private PlayerInput playerInput;
+
+    private void Start()
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+    }
 
     public void InitializeMineralPanel()
     {
@@ -61,12 +68,26 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    foreach (OnPanelMineralData panelMineral in onPanelMinerals)
+        //    {
+        //        OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
+        //    }
+        //}
+
+        if (playerInput.actions["Mineral"].triggered)
         {
-            foreach (OnPanelMineralData panelMineral in onPanelMinerals)
-            {
-                OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
-            }
+            if (isMineralOpened) MineralPanel_Close();
+            else MineralPanel_Open();
+        }
+    }
+
+    public void MineralsCheatChange()
+    {
+        foreach (OnPanelMineralData panelMineral in onPanelMinerals)
+        {
+            OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
         }
     }
 }

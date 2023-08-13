@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem;
 
 public class M_Machine : Singleton<M_Machine>
 {
@@ -24,6 +25,7 @@ public class M_Machine : Singleton<M_Machine>
     public Action<object> MineComplete;
 
     private bool isBossFightStart = false;
+    public PlayerInput playerInput;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class M_Machine : Singleton<M_Machine>
         if (!isOnGround) MachineOnDive(transform.position.y);
         else MachineOnGround();
 
-        if (currentMine != null && Input.GetKeyDown(KeyCode.Space) && !isOnMining)
+        if (currentMine != null && playerInput.actions["Mine"].triggered && !isOnMining)
         {
             M_MiningGame.Instance.StartMining(currentGround.GetMineralType(currentMine.transform));
             isOnMining = true;
@@ -46,9 +48,11 @@ public class M_Machine : Singleton<M_Machine>
 
     public void MachineMovement()
     {
-        float horiAxis = Input.GetAxis("Horizontal");
-        float verAxis = Input.GetAxis("Vertical");
-        Vector3 direction = new Vector3(horiAxis, 0, verAxis).normalized;
+        //float horiAxis = Input.GetAxis("Horizontal");
+        //float verAxis = Input.GetAxis("Vertical");
+        //Vector3 direction = new Vector3(horiAxis, 0, verAxis).normalized;
+        Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>().normalized;
+        Vector3 direction = new Vector3(moveInput.x, 0, moveInput.y);
         if (direction != Vector3.zero)
             rb.velocity = new Vector3(direction.x * moveSpeed, rb.velocity.y, direction.z * moveSpeed);
     }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class M_Sonar : Singleton<M_Sonar>
 {
@@ -15,20 +17,34 @@ public class M_Sonar : Singleton<M_Sonar>
     public GameObject pre_Sonar;
     private bool isWaving = false;
     private float wavingTimer = 0;
+    private PlayerInput playerInput;
+    private bool isSonarToSet = false;
+    public Image sonarImage;
 
     void Start()
     {
         StopWave();
-
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    RaycastHit hit;
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
+        //}
+
+        if (isSonarToSet)
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
+            Vector2 screenPos = playerInput.actions["ScreenPos"].ReadValue<Vector2>();
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+            worldPos.y = M_Machine.Instance.transform.position.y;
+            SonarGeneration(worldPos);
+            //RaycastHit hit;
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
         }
 
         if (isWaving)
@@ -40,11 +56,17 @@ public class M_Sonar : Singleton<M_Sonar>
                 StopWave();
             }
         }
+
+        if (playerInput.actions["Sonar"].triggered)
+        {
+            SetSonarStateChange();
+        }
     }
 
     private void SonarGeneration(Vector3 worldPoint)
     {
         Instantiate(pre_Sonar, worldPoint+new Vector3(0,2,0), Quaternion.identity);
+        SetSonarStateChange();
     }
 
     public void CallWave(Vector3 worldPoint)
@@ -79,5 +101,18 @@ public class M_Sonar : Singleton<M_Sonar>
         mat_Wave.SetFloat("_SizeRatio", mat_Wave_SizeRatio);
         mat_Wave.SetVector("_FocalPoint", newFocal);
         isWaving = true;
+    }
+
+    void SetSonarStateChange()
+    {
+        if (isSonarToSet)
+        {
+            sonarImage.color = Color.black;
+        }
+        else
+        {
+            sonarImage.color = Color.white;
+        }
+        isSonarToSet = !isSonarToSet;
     }
 }
