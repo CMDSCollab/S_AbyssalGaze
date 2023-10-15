@@ -92,7 +92,7 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
     void GetReferences()
     {
-        miningPanel = GameObject.Find("Canvas").transform.Find("P_Mining");
+        miningPanel = GameObject.Find("Canvas").transform.Find("Panel_Mining");
         upperBar = miningPanel.Find("Upper Bar").GetComponent<RectTransform>();
 
         greenLeft = upperBar.transform.Find("Green Left").GetComponent<RectTransform>();

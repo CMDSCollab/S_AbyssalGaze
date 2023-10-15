@@ -21,53 +21,57 @@ public class M_Firearm : MonoBehaviour
     public GameObject fx_Explosion;
     public GameObject fx_ExplosionSmall;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
     public Image weaponButtonImage;
     private float fireTimer;
 
     void Start()
     {
-        playerInput = FindObjectOfType<PlayerInput>();
+        //playerInput = FindObjectOfType<PlayerInput>();
         EquipWeapon(0);
     }
 
     void Update()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //RaycastHit hit;
-        //if (Physics.Raycast(ray, out hit, int.MaxValue))
-        //{
-        //    aimDirection = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(transform.position.x, 0, transform.position.z);
-        //    float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
-        //    parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
-        //}
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, int.MaxValue))
+        {
+            aimDirection = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(transform.position.x, 0, transform.position.z);
+            float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
+            parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
+        }
 
-        //if (currentType != GunType.Laser && Input.GetMouseButtonDown(0)) Firing();
-        //if (currentType == GunType.Laser)
-        //{
-        //    if (Input.GetMouseButtonDown(0)) EnableLaser();
-        //    if (Input.GetMouseButton(0)) FiringLaser();
-        //    if (Input.GetMouseButtonUp(0)) DisableLaser();
-        //}
+        if (currentType != GunType.Laser && Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("ENtered");
+            Firing(); 
+        }
+        if (currentType == GunType.Laser)
+        {
+            if (Input.GetMouseButtonDown(0)) EnableLaser();
+            if (Input.GetMouseButton(0)) FiringLaser();
+            if (Input.GetMouseButtonUp(0)) DisableLaser();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.Q)) SwitchWeapon(1);
+        if (Input.GetKeyDown(KeyCode.Q)) SwitchWeapon(1);
 
 
-        Vector2 inputDirection = playerInput.actions["Shoot"].ReadValue<Vector2>();
-        aimDirection = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
-        float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
-        parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
+        //Vector2 inputDirection = playerInput.actions["Shoot"].ReadValue<Vector2>();
+        //aimDirection = new Vector3(inputDirection.x, 0, inputDirection.y).normalized;
+        //float angle = Mathf.Atan2(aimDirection.x, aimDirection.z) * Mathf.Rad2Deg;
+        //parent_Rotation.localRotation = Quaternion.Euler(0, angle, 0);
 
         fireTimer -= Time.deltaTime;
 
-        if (currentType != GunType.Laser && aimDirection != Vector3.zero && fireTimer<0) Firing();
-        if (currentType == GunType.Laser) {
-            if (aimDirection != Vector3.zero) EnableLaser();
-            if (aimDirection != Vector3.zero) FiringLaser();
-            if (aimDirection == Vector3.zero) DisableLaser();
-        } 
+        //if (currentType != GunType.Laser && aimDirection != Vector3.zero && fireTimer<0) Firing();
+        //if (currentType == GunType.Laser) {
+        //    if (aimDirection != Vector3.zero) EnableLaser();
+        //    if (aimDirection != Vector3.zero) FiringLaser();
+        //    if (aimDirection == Vector3.zero) DisableLaser();
+        //} 
 
-        if (playerInput.actions["Weapon"].triggered) SwitchWeapon(1);
+        //if (playerInput.actions["Weapon"].triggered) SwitchWeapon(1);
     }
 
     void EquipWeapon(int weaponIndex)

@@ -58,15 +58,4 @@ public class M_Mineral : Singleton<M_Mineral>
         newLayer.SetParent(parent_MineralColliders);
         return newLayer;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    foreach (Vector2 pivot in circlePivots)
-    //    {
-    //        Gizmos.DrawSphere(new Vector3(pivot.x, 0, pivot.y), circleRadius);
-    //    }
-    //}
-
-
-
 }

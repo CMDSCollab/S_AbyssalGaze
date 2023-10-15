@@ -27,7 +27,7 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
             OnPanelMineralData newMData = new(
                 minerals[i].type,
                 layoutGroup.GetChild(i).GetComponentInChildren<TMPro.TMP_Text>(),
-                layoutGroup.GetChild(i).GetComponent<Image>(),
+                layoutGroup.GetChild(i).Find("Mineral").GetComponent<Image>(),
                 0
             );
             onPanelMinerals.Add(newMData);
@@ -50,13 +50,19 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
 
     public void MineralPanel_Open()
     {
-        panel_Mineral.DOScale(Vector3.one, 0.2f);
+        //panel_Mineral.DOScale(Vector3.one, 0.2f);
+        RectTransform panelRect = panel_Mineral.GetComponent<RectTransform>();
+        Vector2 targetPos = new Vector2(panelRect.anchoredPosition.x, -205);
+        DOTween.To(() => panelRect.anchoredPosition, x => panelRect.anchoredPosition = x, targetPos, 0.3f);
         isMineralOpened = true;
     }
 
     public void MineralPanel_Close()
     {
-        panel_Mineral.DOScale(Vector3.zero, 0.2f);
+        //panel_Mineral.DOScale(Vector3.zero, 0.2f);
+        RectTransform panelRect = panel_Mineral.GetComponent<RectTransform>();
+        Vector2 targetPos = new Vector2(panelRect.anchoredPosition.x, 145);
+        DOTween.To(() => panelRect.anchoredPosition, x => panelRect.anchoredPosition = x, targetPos, 0.3f);
         isMineralOpened = false;
     }
 

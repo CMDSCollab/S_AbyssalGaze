@@ -16,28 +16,44 @@ public class M_Skill : Singleton<M_Skill>
     private PlayerInput playerInput;
     private bool isFirstOpen = true;
 
+    public PanelPosData[] panelPos;
+
     void Start()
     {
-        playerInput = FindObjectOfType<PlayerInput>();
+        //playerInput = FindObjectOfType<PlayerInput>();
     }
        
     void Update()
     {
-        if (playerInput.actions["Skill"].triggered)
+        SkillPanelStateControl();
+    }
+
+    #region OpenSkillPanel
+    private void SkillPanelStateControl()
+    {
+        //if (playerInput.actions["Skill"].triggered)
+        if (Input.GetKeyUp(KeyCode.I))
         {
             if (isSkillPanelOpen)
             {
                 Sequence s = DOTween.Sequence();
-                s.AppendCallback(() => DOTween.To(() => panel_Skill.alpha, x => panel_Skill.alpha = x, 0, speed_PanelOpen));
+                s.AppendCallback(() => SkillMove(true));
+                s.AppendInterval(speed_PanelOpen);
+                s.AppendCallback(() => MainMove(false));
                 s.AppendInterval(speed_PanelOpen);
                 s.AppendCallback(() => isSkillPanelOpen = false);
-                s.AppendCallback(() => panel_Skill.gameObject.SetActive(false));
+                //s.AppendCallback(() => panel_Skill.gameObject.SetActive(false));
             }
             else
             {
                 Sequence s = DOTween.Sequence();
-                s.AppendCallback(() => panel_Skill.gameObject.SetActive(true));
-                s.AppendCallback(() => DOTween.To(() => panel_Skill.alpha, x => panel_Skill.alpha = x, 1, speed_PanelOpen));
+                //s.AppendCallback(() => panel_Skill.gameObject.SetActive(true));
+                //s.AppendCallback(() => DOTween.To(() => panel_Skill.alpha, x => panel_Skill.alpha = x, 1, speed_PanelOpen));
+                //s.AppendInterval(speed_PanelOpen);
+                //s.AppendCallback(() => isSkillPanelOpen = true);
+                s.AppendCallback(() => MainMove(true));
+                s.AppendInterval(speed_PanelOpen);
+                s.AppendCallback(() => SkillMove(false));
                 s.AppendInterval(speed_PanelOpen);
                 s.AppendCallback(() => isSkillPanelOpen = true);
             }
@@ -48,18 +64,40 @@ public class M_Skill : Singleton<M_Skill>
                 isFirstOpen = false;
             }
         }
-    
     }
+
+    private void MainMove(bool isMoveOut)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            MoveTo(panelPos[i], isMoveOut, false);
+        }
+    }
+
+    private void SkillMove(bool isMoveOut)
+    {
+        MoveTo(panelPos[4], isMoveOut, false);
+        MoveTo(panelPos[5], isMoveOut, true);
+        MoveTo(panelPos[6], isMoveOut, true);
+    }
+
+    void MoveTo(PanelPosData targetPanel, bool isMoveOut, bool isHori)
+    {
+        float newF = isMoveOut ?  targetPanel.posOut: targetPanel.posIn;
+        Vector2 newV2 = isHori ? new Vector2(newF, targetPanel.targetPanel.anchoredPosition.y) : new Vector2(targetPanel.targetPanel.anchoredPosition.x, newF);
+        DOTween.To(() => targetPanel.targetPanel.anchoredPosition, x => targetPanel.targetPanel.anchoredPosition = x, newV2, speed_PanelOpen);
+    }
+    #endregion
 
     public void OpenUpgradePanel(SO_Skill targetSkill)
     {
-        panel_Upgrade.DOScale(1, 0.2f);
-        M_MineralPanel.Instance.MineralPanel_Open();
-        panel_Upgrade.Find("Skill Icon").GetComponent<Image>().sprite = targetSkill.skillIcon;
-        panel_Upgrade.Find("Skill Name").GetComponent<TMP_Text>().text = targetSkill.skillName;
-        panel_Upgrade.Find("Skill Intro").GetComponent<TMP_Text>().text = targetSkill.skillDes;
+        //panel_Upgrade.DOScale(1, 0.2f);
+        //M_MineralPanel.Instance.MineralPanel_Open();
+        //panel_Upgrade.Find("Skill Icon").GetComponent<Image>().sprite = targetSkill.skillIcon;
+        panel_Upgrade.GetChild(0).Find("Skill Name").GetComponent<TMP_Text>().text = targetSkill.skillName;
+        panel_Upgrade.GetChild(0).Find("Skill Intro").GetComponent<TMP_Text>().text = targetSkill.skillDes;
 
-        Transform requireParent = panel_Upgrade.Find("Requires");
+        Transform requireParent = panel_Upgrade.GetChild(0).Find("Requires");
         if (requireParent.childCount != 0)
         {
             for (int i = 0; i < requireParent.childCount; i++)
@@ -77,7 +115,7 @@ public class M_Skill : Singleton<M_Skill>
             foreach (MineralInfo mineralData in M_Major.Instance.repository.minerals)
                 if (mineralData.type == require.mineralType) targetMineralImage = mineralData.image;
             Transform newRequire = Instantiate(pre_MineralRequire, requireParent).transform;
-            newRequire.GetComponent<Image>().sprite = targetMineralImage;
+            newRequire.Find("Mineral").GetComponent<Image>().sprite = targetMineralImage;
             newRequire.GetComponentInChildren<TMP_Text>().text = require.number.ToString();
 
             foreach (OnPanelMineralData onPanelMineral in M_MineralPanel.Instance.onPanelMinerals)
@@ -87,10 +125,10 @@ public class M_Skill : Singleton<M_Skill>
         if (targetRequireTypeCount == targetSkill.upgradeRequires.Length)
         {
             if (!O_SkillUI.currentSelectedSkill.GetUnlockState())
-                panel_Upgrade.Find("Button").GetComponent<Button>().interactable = true;
-            else panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
+                panel_Upgrade.GetChild(0).Find("Button").GetComponent<Button>().interactable = true;
+            else panel_Upgrade.GetChild(0).Find("Button").GetComponent<Button>().interactable = false;
         }
-        else panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
+        else panel_Upgrade.GetChild(0).Find("Button").GetComponent<Button>().interactable = false;
     }
 
     public void CloseUpgradePanel()
@@ -108,4 +146,12 @@ public class M_Skill : Singleton<M_Skill>
                 if (require.mineralType == onPanelMineral.type)
                     M_MineralPanel.Instance.UpdateOnPanelMineralInfo(require.mineralType, -require.number);
     }
+}
+
+[System.Serializable]
+public class PanelPosData
+{
+    public RectTransform targetPanel;
+    public float posIn;
+    public float posOut;
 }

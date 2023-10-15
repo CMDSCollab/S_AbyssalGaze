@@ -180,8 +180,19 @@
                 },
                 {
                     "name": "",
+                    "id": "8f9ca538-8fe6-47ab-bf0e-64a56d3448fb",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "762aef88-7ef2-4ad0-94e1-5ffe69ab170d",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -203,7 +214,7 @@
                 {
                     "name": "",
                     "id": "ed598d83-7b8a-407d-bc80-573024931314",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -224,9 +235,31 @@
                 },
                 {
                     "name": "",
+                    "id": "4d64b007-c82e-4c1f-a1ad-1b23eb54aeba",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mineral",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f4216622-f512-4a02-b718-226bbafd3575",
                     "path": "<Touchscreen>/position",
                     "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3990e65-b2d4-47fa-a1f7-160e5143c8fb",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ScreenPos",

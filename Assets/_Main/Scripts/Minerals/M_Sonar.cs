@@ -29,12 +29,12 @@ public class M_Sonar : Singleton<M_Sonar>
 
     void Update()
     {
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    RaycastHit hit;
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
-        //}
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
+        }
 
         if (isSonarToSet)
         {
@@ -57,10 +57,10 @@ public class M_Sonar : Singleton<M_Sonar>
             }
         }
 
-        if (playerInput.actions["Sonar"].triggered)
-        {
-            SetSonarStateChange();
-        }
+        //if (playerInput.actions["Sonar"].triggered)
+        //{
+        //    SetSonarStateChange();
+        //}
     }
 
     private void SonarGeneration(Vector3 worldPoint)
