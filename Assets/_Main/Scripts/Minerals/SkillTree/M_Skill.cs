@@ -140,7 +140,7 @@ public class M_Skill : Singleton<M_Skill>
     public void UpgradeCertainSkill()
     {
         O_SkillUI.currentSelectedSkill.UnlockThisSkill();
-        panel_Upgrade.Find("Button").GetComponent<Button>().interactable = false;
+        panel_Upgrade.GetChild(0).Find("Button").GetComponent<Button>().interactable = false;
         foreach (UpgradeRequire require in O_SkillUI.currentSelectedSkill.thisSkillInfo.upgradeRequires)
             foreach (OnPanelMineralData onPanelMineral in M_MineralPanel.Instance.onPanelMinerals)
                 if (require.mineralType == onPanelMineral.type)

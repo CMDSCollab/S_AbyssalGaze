@@ -74,19 +74,25 @@ public class M_MineralPanel : Singleton<M_MineralPanel>
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    foreach (OnPanelMineralData panelMineral in onPanelMinerals)
-        //    {
-        //        OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
-        //    }
-        //}
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            foreach (OnPanelMineralData panelMineral in onPanelMinerals)
+            {
+                OnPanelMineralValueChange(panelMineral, Random.Range(20, 80));
+            }
+        }
 
         if (playerInput.actions["Mineral"].triggered)
         {
             if (isMineralOpened) MineralPanel_Close();
             else MineralPanel_Open();
         }
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (isMineralOpened) MineralPanel_Close();
+        //    else MineralPanel_Open();
+        //}
     }
 
     public void MineralsCheatChange()

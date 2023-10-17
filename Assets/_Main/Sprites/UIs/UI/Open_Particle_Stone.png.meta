@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 80a04245226cccd4aa86a7eb56eefc31
+guid: ef17293f4665b4a42b04c1674abc47f8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,18 +102,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -137,185 +125,29 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Minerals_0
+      name: Open_Particle_Stone_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1000
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a140739fb3343443ac8b9dc09143063
-      internalID: 215100138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_1
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 1000
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2ec0a25d5f8eae43885228f4aa1e3da
-      internalID: 47233812
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_2
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 1000
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c92245e0f8ec63347a22a3b4bcd845e2
-      internalID: 1260643435
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_3
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 1000
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24d579d707a150443be83a64d42f7345
-      internalID: 357142160
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 500
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15d39bb29504cb8438fda4dccaa3760e
-      internalID: -56305625
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_5
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 500
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 238f594ac11aa054290cdf25fee1515f
-      internalID: 427876467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_6
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 500
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 753415e7aca6e06489f7502ca8988a05
-      internalID: -177480645
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_7
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 500
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e1d6ea9b25cd529449a3fcbdc4ef033a
-      internalID: 259775324
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Minerals_8
-      rect:
-        serializedVersion: 2
-        x: 500
         y: 0
-        width: 500
-        height: 500
+        width: 400
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40242464aa0976d428eed66a66ac7feb
-      internalID: 264458706
+      spriteID: 4b2d221efb43655489f7e1faed35175e
+      internalID: -358913723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Minerals_9
+      name: Open_Particle_Stone_1
       rect:
         serializedVersion: 2
-        x: 1500
+        x: 400
         y: 0
-        width: 500
-        height: 500
+        width: 400
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,8 +176,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c09bb0135dd76b41ab407c6c797ae65
-      internalID: 709052735
+      spriteID: e37b8c8d6fb9c004e8dd5d986a3482b0
+      internalID: -188902880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Open_Particle_Stone_2
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c4c5b527fce0d54d92d087c759648af
+      internalID: -1782890335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Open_Particle_Stone_3
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9801b7c30cf562b4f98866e56e34f049
+      internalID: -1965860432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Open_Particle_Stone_4
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 400
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8338f04deda7b564da6b594067551348
+      internalID: -1840783503
       vertices: []
       indices: 
       edges: []
@@ -361,16 +256,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Minerals_0: 215100138
-      Minerals_1: 47233812
-      Minerals_2: 1260643435
-      Minerals_3: 357142160
-      Minerals_4: -56305625
-      Minerals_5: 427876467
-      Minerals_6: -177480645
-      Minerals_7: 259775324
-      Minerals_8: 264458706
-      Minerals_9: 709052735
+      Open_Particle_Stone_0: -358913723
+      Open_Particle_Stone_1: -188902880
+      Open_Particle_Stone_2: -1782890335
+      Open_Particle_Stone_3: -1965860432
+      Open_Particle_Stone_4: -1840783503
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

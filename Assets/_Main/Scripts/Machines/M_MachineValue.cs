@@ -103,7 +103,7 @@ public class M_MachineValue : Singleton<M_MachineValue>
         if (noDamgeTimer < 0f)
         {
             DOTween.To(() => hpDots[dotHp].color, x => hpDots[dotHp].color = x, new Color(255, 0, 0, 255), 0.3f).OnComplete(() => dotHp++);
-            Debug.Log(dotHp);
+            //Debug.Log(dotHp);
             //dotHp++;
             noDamgeTimer = 1f;
         }

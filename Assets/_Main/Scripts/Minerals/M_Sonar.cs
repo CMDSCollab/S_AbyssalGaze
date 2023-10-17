@@ -24,7 +24,7 @@ public class M_Sonar : Singleton<M_Sonar>
     void Start()
     {
         StopWave();
-        playerInput = FindObjectOfType<PlayerInput>();
+        //playerInput = FindObjectOfType<PlayerInput>();
     }
 
     void Update()
@@ -36,16 +36,16 @@ public class M_Sonar : Singleton<M_Sonar>
             if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
         }
 
-        if (isSonarToSet)
-        {
-            Vector2 screenPos = playerInput.actions["ScreenPos"].ReadValue<Vector2>();
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            worldPos.y = M_Machine.Instance.transform.position.y;
-            SonarGeneration(worldPos);
-            //RaycastHit hit;
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
-        }
+        //if (isSonarToSet)
+        //{
+        //    Vector2 screenPos = playerInput.actions["ScreenPos"].ReadValue<Vector2>();
+        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        //    worldPos.y = M_Machine.Instance.transform.position.y;
+        //    SonarGeneration(worldPos);
+        //    //RaycastHit hit;
+        //    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    //if (Physics.Raycast(ray, out hit, int.MaxValue)) SonarGeneration(hit.point);
+        //}
 
         if (isWaving)
         {

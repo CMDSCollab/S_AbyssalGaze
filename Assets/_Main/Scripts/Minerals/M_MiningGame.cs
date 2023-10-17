@@ -82,10 +82,17 @@ public class M_MiningGame : Singleton<M_MiningGame>
             }
 
 
-            if (playerInput.actions["Mine"].triggered)
+            //if (playerInput.actions["Mine"].triggered)
+            //{
+            //    redRight.anchoredPosition += new Vector2(XPosToExpandPerPress, 0);
+            //    redLeft.anchoredPosition-= new Vector2(XPosToExpandPerPress, 0);
+            //}
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 redRight.anchoredPosition += new Vector2(XPosToExpandPerPress, 0);
-                redLeft.anchoredPosition-= new Vector2(XPosToExpandPerPress, 0);
+                redLeft.anchoredPosition -= new Vector2(XPosToExpandPerPress, 0);
             }
         }
     }
@@ -116,8 +123,10 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
     void OpenMiningPanel()
     {
+        //Debug.Log("asdads");
         Sequence s = DOTween.Sequence();
-        s.Append(miningPanel.DOScale(1, 0.5f));
+        //s.Append(miningPanel.DOScale(1, 0.5f));
+        s.AppendCallback(() => MoveTo(miningPanel.GetComponent<RectTransform>(), false));
         s.AppendInterval(1f);
         s.AppendCallback(() => isGameRunning = true);
         M_Machine.Instance.isOnMining = true;
@@ -132,7 +141,8 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
     void CloseMiningPanel()
     {
-        miningPanel.DOScale(0, 0.5f);
+        //Debug.Log("aaaaaa");
+        MoveTo(miningPanel.GetComponent<RectTransform>(), true);
         M_Machine.Instance.isOnMining = false;
     }
 
@@ -181,5 +191,12 @@ public class M_MiningGame : Singleton<M_MiningGame>
     void UpdateMineralToGetNumber(int targetNumber)
     {
         text_Number.text = mineralToGet.ToString();
+    }
+
+    void MoveTo(RectTransform targetPanel, bool isMoveOut)
+    {
+        float newF = isMoveOut ? -212f : 244;
+        Vector2 newV2 = new Vector2(targetPanel.anchoredPosition.x, newF);
+        DOTween.To(() => targetPanel.anchoredPosition, x => targetPanel.anchoredPosition = x, newV2, 1);
     }
 }

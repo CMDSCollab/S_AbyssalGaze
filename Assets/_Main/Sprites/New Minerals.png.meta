@@ -125,6 +125,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -349,16 +361,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      New Minerals_0: -1777320861
       New Minerals_1: 506485359
-      New Minerals_6: 1566998212
-      New Minerals_4: 298537943
       New Minerals_2: -1125807361
+      New Minerals_3: -45502252
+      New Minerals_4: 298537943
+      New Minerals_5: -1720842207
+      New Minerals_6: 1566998212
+      New Minerals_7: 266750624
       New Minerals_8: 1497946263
       New Minerals_9: -1464278306
-      New Minerals_0: -1777320861
-      New Minerals_3: -45502252
-      New Minerals_5: -1720842207
-      New Minerals_7: 266750624
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
