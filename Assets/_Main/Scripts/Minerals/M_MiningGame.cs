@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class M_MiningGame : Singleton<M_MiningGame>
 {
@@ -27,7 +28,8 @@ public class M_MiningGame : Singleton<M_MiningGame>
     private bool isGameRunning = false;
 
     private Image img_Mineral;
-    private TMPro.TMP_Text text_Number;
+    private TMP_Text txt_MineralName;
+    private TMP_Text text_Number;
     private float shrinkSpeed;
     private float miningTime;
     private float miningTimer;
@@ -43,6 +45,11 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
     public Action GameEnd;
     private PlayerInput playerInput;
+
+    [Header("Laser")]
+    public O_MiningLaser laserLeft;
+    public O_MiningLaser laserRight;
+    public MeshRenderer mineralMR;
 
     void Start()
     {
@@ -65,7 +72,14 @@ public class M_MiningGame : Singleton<M_MiningGame>
                 redLeft.anchoredPosition = new Vector2(0, 0);
             }
 
-            if (redRight.anchoredPosition.x < redInGreenMaxXPos && redRight.anchoredPosition.x > redInGreenMinXPos)
+            //if (redRight.anchoredPosition.x < redInGreenMaxXPos && redRight.anchoredPosition.x > redInGreenMinXPos)
+            //{
+            //    inGreenTimer += Time.deltaTime;
+            //    mineralToGet = Mathf.RoundToInt(inGreenTimer);
+            //    UpdateMineralToGetNumber(mineralToGet);
+            //}
+
+            if (laserLeft.isDigging)
             {
                 inGreenTimer += Time.deltaTime;
                 mineralToGet = Mathf.RoundToInt(inGreenTimer);
@@ -91,8 +105,11 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                redRight.anchoredPosition += new Vector2(XPosToExpandPerPress, 0);
-                redLeft.anchoredPosition -= new Vector2(XPosToExpandPerPress, 0);
+                laserLeft.LaserShrink();
+                laserRight.LaserShrink();
+
+                //redRight.anchoredPosition += new Vector2(XPosToExpandPerPress, 0);
+                //redLeft.anchoredPosition -= new Vector2(XPosToExpandPerPress, 0);
             }
         }
     }
@@ -113,6 +130,7 @@ public class M_MiningGame : Singleton<M_MiningGame>
 
         img_Mineral = miningPanel.Find("Mineral Image").GetComponent<Image>();
         text_Number = miningPanel.Find("Mineral Number").GetComponent<TMPro.TMP_Text>();
+        txt_MineralName = miningPanel.Find("Mineral Name").GetComponent<TMP_Text>();
     }
 
     public void StartMining(MineralType targetMineral)
@@ -129,6 +147,8 @@ public class M_MiningGame : Singleton<M_MiningGame>
         s.AppendCallback(() => MoveTo(miningPanel.GetComponent<RectTransform>(), false));
         s.AppendInterval(1f);
         s.AppendCallback(() => isGameRunning = true);
+        s.AppendCallback(() => laserLeft.LaserStart());
+        s.AppendCallback(() => laserRight.LaserStart());
         M_Machine.Instance.isOnMining = true;
     }
 
@@ -143,6 +163,8 @@ public class M_MiningGame : Singleton<M_MiningGame>
     {
         //Debug.Log("aaaaaa");
         MoveTo(miningPanel.GetComponent<RectTransform>(), true);
+         laserLeft.LaserEnd();
+        laserRight.LaserEnd();
         M_Machine.Instance.isOnMining = false;
     }
 
@@ -150,25 +172,25 @@ public class M_MiningGame : Singleton<M_MiningGame>
     {
         currentMineralType = targetMineral;
         MineralInfo mInfo = GetMineralInfoBaseOnType(targetMineral);
-        float upperBarWidth = upperBar.rect.width;
+        //float upperBarWidth = upperBar.rect.width;
 
-        float greenWidthPerDifficulty = (greenWidthMax - greenWidthMin) / maxDifficulty;
-        greenWidth = (maxDifficulty - mInfo.difficulty) * greenWidthPerDifficulty + greenWidthMin;
-        float greenXPosMax = upperBarWidth / 2 - greenWidth / 2 - twoSideOffset;
-        float greenXPosMin = greenWidth / 2 + twoSideOffset;
-        float greenTargetXPos = UnityEngine.Random.Range(greenXPosMin, greenXPosMax);
-        greenRight.anchoredPosition = new Vector2(greenTargetXPos, 0);
-        greenRight.sizeDelta = new Vector2(greenWidth, greenRight.rect.height);
-        greenLeft.anchoredPosition = new Vector2(-greenTargetXPos, 0);
-        greenLeft.sizeDelta = new Vector2(greenWidth, greenRight.rect.height);
+        //float greenWidthPerDifficulty = (greenWidthMax - greenWidthMin) / maxDifficulty;
+        //greenWidth = (maxDifficulty - mInfo.difficulty) * greenWidthPerDifficulty + greenWidthMin;
+        //float greenXPosMax = upperBarWidth / 2 - greenWidth / 2 - twoSideOffset;
+        //float greenXPosMin = greenWidth / 2 + twoSideOffset;
+        //float greenTargetXPos = UnityEngine.Random.Range(greenXPosMin, greenXPosMax);
+        //greenRight.anchoredPosition = new Vector2(greenTargetXPos, 0);
+        //greenRight.sizeDelta = new Vector2(greenWidth, greenRight.rect.height);
+        //greenLeft.anchoredPosition = new Vector2(-greenTargetXPos, 0);
+        //greenLeft.sizeDelta = new Vector2(greenWidth, greenRight.rect.height);
 
-        float redXPosMax = upperBar.rect.width/2 - redRight.rect.width / 2;
-        redRight.anchoredPosition = new Vector2(redXPosMax, 0);
-        redLeft.anchoredPosition = new Vector2(-redXPosMax, 0);
-        redInGreenMaxXPos = greenRight.anchoredPosition.x + greenRight.rect.width / 2 + redRight.rect.width / 2;
-        redInGreenMinXPos = greenRight.anchoredPosition.x - greenRight.rect.width / 2 - redRight.rect.width / 2;
+        //float redXPosMax = upperBar.rect.width/2 - redRight.rect.width / 2;
+        //redRight.anchoredPosition = new Vector2(redXPosMax, 0);
+        //redLeft.anchoredPosition = new Vector2(-redXPosMax, 0);
+        //redInGreenMaxXPos = greenRight.anchoredPosition.x + greenRight.rect.width / 2 + redRight.rect.width / 2;
+        //redInGreenMinXPos = greenRight.anchoredPosition.x - greenRight.rect.width / 2 - redRight.rect.width / 2;
 
-        defaultPadding = new Vector4(bottomBar.rect.width / 2,0, bottomBar.rect.width / 2, 0);
+        defaultPadding = new Vector4(bottomBar.rect.width / 2, 0, bottomBar.rect.width / 2, 0);
         bottomBarMask.padding = defaultPadding;
 
         shrinkSpeed = mInfo.shrinkSpeed;
@@ -177,7 +199,9 @@ public class M_MiningGame : Singleton<M_MiningGame>
         inGreenTimer = 0;
         mineralToGet = 0;
 
-        img_Mineral.sprite = mInfo.image;
+        //img_Mineral.sprite = mInfo.image;
+        mineralMR.material.SetTexture("_BaseMap", mInfo.texture);
+        txt_MineralName.text = mInfo.mName;
         UpdateMineralToGetNumber(mineralToGet);
 
         MineralInfo GetMineralInfoBaseOnType(MineralType targetMineral)

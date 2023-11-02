@@ -20,14 +20,13 @@ public class O_SkillUI : MonoBehaviour,IPointerClickHandler
 
     void Start()
     {
-        //InitializeSkill();
+        InitializeSkill();
     }
 
     void InitializeSkill()
     {
         transform.Find("Icon").GetComponent<Image>().sprite = thisSkillInfo.skillIcon;
-        transform.Find("Skill Color").GetComponent<Image>().color = 
-            (thisSkillInfo.SkillInfo.skillType == SkillType.Unlock) ? Color.blue : Color.white;
+        transform.Find("Icon").GetComponent<Image>().color = Color.black;
         //transform.GetComponent<Image>().color = Color.black;
     }
 
@@ -51,6 +50,8 @@ public class O_SkillUI : MonoBehaviour,IPointerClickHandler
 
         Image frame = transform.Find("Frame Fill").GetComponent<Image>();
         DOTween.To(() => frame.fillAmount, x => frame.fillAmount = x, 1, fillTime);
+        yield return new WaitForSeconds(fillTime);
+        transform.Find("Icon").GetComponent<Image>().color = M_Major.Instance.orange;
 
         void LineFill(Transform targetLine)
         {

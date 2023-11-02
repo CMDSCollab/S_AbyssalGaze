@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Repository
   m_EditorClassIdentifier: 
   minerals:
-  - image: {fileID: -1777320861, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+  - image: {fileID: 21300000, guid: ff246c09b7f9bc3418425463d5985f04, type: 3}
+    texture: {fileID: 2800000, guid: ff246c09b7f9bc3418425463d5985f04, type: 3}
     type: 0
     minDepth: 0
     maxDepth: 3
@@ -22,7 +23,9 @@ MonoBehaviour:
     difficulty: 1
     shrinkSpeed: 4
     miningTime: 10
-  - image: {fileID: 506485359, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Copper
+  - image: {fileID: 21300000, guid: 1f964196cf7fb65439909fc4f9063d4b, type: 3}
+    texture: {fileID: 2800000, guid: 1f964196cf7fb65439909fc4f9063d4b, type: 3}
     type: 1
     minDepth: 0
     maxDepth: 4
@@ -31,7 +34,9 @@ MonoBehaviour:
     difficulty: 2
     shrinkSpeed: 4
     miningTime: 10
-  - image: {fileID: -1125807361, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Mangaese
+  - image: {fileID: 21300000, guid: be0a099ebfab9894da151b2deec63f33, type: 3}
+    texture: {fileID: 2800000, guid: be0a099ebfab9894da151b2deec63f33, type: 3}
     type: 2
     minDepth: 0
     maxDepth: 5
@@ -40,7 +45,9 @@ MonoBehaviour:
     difficulty: 3
     shrinkSpeed: 4
     miningTime: 10
-  - image: {fileID: -45502252, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Cobalt
+  - image: {fileID: 21300000, guid: f14a5dcbfae36e94fb7b32a5416ff60e, type: 3}
+    texture: {fileID: 2800000, guid: f14a5dcbfae36e94fb7b32a5416ff60e, type: 3}
     type: 3
     minDepth: 1
     maxDepth: 4
@@ -49,7 +56,9 @@ MonoBehaviour:
     difficulty: 4
     shrinkSpeed: 4
     miningTime: 10
-  - image: {fileID: 298537943, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Nickel
+  - image: {fileID: 21300000, guid: da12a4afde26f6946a37f7df5f8db482, type: 3}
+    texture: {fileID: 2800000, guid: da12a4afde26f6946a37f7df5f8db482, type: 3}
     type: 4
     minDepth: 3
     maxDepth: 6
@@ -58,7 +67,9 @@ MonoBehaviour:
     difficulty: 5
     shrinkSpeed: 2
     miningTime: 2
-  - image: {fileID: -1720842207, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Diamond
+  - image: {fileID: 21300000, guid: d504aa37db3b78449b3abf2df837b59c, type: 3}
+    texture: {fileID: 2800000, guid: d504aa37db3b78449b3abf2df837b59c, type: 3}
     type: 5
     minDepth: 5
     maxDepth: 8
@@ -67,7 +78,9 @@ MonoBehaviour:
     difficulty: 6
     shrinkSpeed: 2
     miningTime: 2
-  - image: {fileID: 1566998212, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Molybdenum
+  - image: {fileID: 21300000, guid: 3ff9e39055af85340a471944578ba25a, type: 3}
+    texture: {fileID: 2800000, guid: 3ff9e39055af85340a471944578ba25a, type: 3}
     type: 6
     minDepth: 2
     maxDepth: 6
@@ -76,7 +89,9 @@ MonoBehaviour:
     difficulty: 7
     shrinkSpeed: 2
     miningTime: 2
-  - image: {fileID: 266750624, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Yttrium
+  - image: {fileID: 21300000, guid: 4f8aa40f878e44440a4790daabde0e1f, type: 3}
+    texture: {fileID: 2800000, guid: 4f8aa40f878e44440a4790daabde0e1f, type: 3}
     type: 7
     minDepth: 3
     maxDepth: 9
@@ -85,7 +100,9 @@ MonoBehaviour:
     difficulty: 8
     shrinkSpeed: 2
     miningTime: 2
-  - image: {fileID: 1497946263, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Evolnite
+  - image: {fileID: 21300000, guid: 9c1670cc842541e4fa8e0a486ee09732, type: 3}
+    texture: {fileID: 2800000, guid: 9c1670cc842541e4fa8e0a486ee09732, type: 3}
     type: 8
     minDepth: 4
     maxDepth: 8
@@ -94,7 +111,9 @@ MonoBehaviour:
     difficulty: 9
     shrinkSpeed: 2
     miningTime: 2
-  - image: {fileID: -1464278306, guid: 3e7260a70bf47974fa2d114caa27ff1c, type: 3}
+    mName: Solsite
+  - image: {fileID: 21300000, guid: a6fa04dde71e0f244b0018605aeae3a6, type: 3}
+    texture: {fileID: 2800000, guid: a6fa04dde71e0f244b0018605aeae3a6, type: 3}
     type: 9
     minDepth: 4
     maxDepth: 10
@@ -103,3 +122,4 @@ MonoBehaviour:
     difficulty: 10
     shrinkSpeed: 2
     miningTime: 2
+    mName: Uranite

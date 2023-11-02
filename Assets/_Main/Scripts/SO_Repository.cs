@@ -12,6 +12,7 @@ public class SO_Repository : ScriptableObject
 public class MineralInfo
 {
     public Sprite image;
+    public Texture texture;
     public MineralType type;
     public int minDepth;
     public int maxDepth;
@@ -20,6 +21,7 @@ public class MineralInfo
     public int difficulty;
     public float shrinkSpeed;
     public float miningTime;
+    public string mName;
 }
 
 public enum MineralType { M1,M2,M3,M4,M5,M6,M7,M8,M9,M10}

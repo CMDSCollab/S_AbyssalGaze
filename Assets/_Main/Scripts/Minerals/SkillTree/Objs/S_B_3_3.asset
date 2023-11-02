@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4199ae0e3b71aed4ca48960f15fb7248, type: 3}
   m_Name: S_B_3_3
   m_EditorClassIdentifier: 
-  skillName: B5
-  skillIcon: {fileID: -1396799313, guid: 1e95c85b8c1b7f841a0d1a55fbc658c4, type: 3}
+  skillName: Increased Energy Density II
+  skillIcon: {fileID: -1433689728, guid: 2f2b04d7c348c504596c8099a5ea1304, type: 3}
   skillDes: Laser + 30% DMG
   SkillInfo:
     skillType: 0

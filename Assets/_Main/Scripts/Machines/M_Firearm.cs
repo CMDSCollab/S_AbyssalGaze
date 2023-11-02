@@ -44,7 +44,7 @@ public class M_Firearm : MonoBehaviour
 
         if (currentType != GunType.Laser && Input.GetMouseButtonDown(0))
         {
-            Debug.Log("ENtered");
+            //Debug.Log("ENtered");
             Firing(); 
         }
         if (currentType == GunType.Laser)

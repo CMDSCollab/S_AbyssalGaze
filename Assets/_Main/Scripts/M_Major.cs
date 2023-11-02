@@ -5,6 +5,7 @@ using UnityEngine;
 public class M_Major : Singleton<M_Major>
 {
     public SO_Repository repository;
+    public Color orange;
 
     private void Start()
     {

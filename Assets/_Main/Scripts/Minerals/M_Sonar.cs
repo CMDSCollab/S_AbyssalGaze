@@ -72,9 +72,9 @@ public class M_Sonar : Singleton<M_Sonar>
     public void CallWave(Vector3 worldPoint)
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPoint);
-        float offset = Screen.width / 1920;
-        float focalResetX = screenPos.x / 1920;
-        float focalResetY = screenPos.y / 1080;
+        float offset = Screen.width / 2560;
+        float focalResetX = screenPos.x / 2560;
+        float focalResetY = screenPos.y / 1440;
         Vector2 newFocal = new Vector2(focalResetX, focalResetY);
         SetNewWaveValue(newFocal);
         //StopWave(2.5f);
